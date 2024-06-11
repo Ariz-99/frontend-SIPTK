@@ -8,6 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function DosenDashboard() {
     const isDetailMahasiswa = useMatch('/dosen/perwalian/detail/:mahasiswaId');
+    const isProfileDosen = useMatch('/dosen/profil/*');
+
+    const hideSideNavbar = isDetailMahasiswa || isProfileDosen;
 
     return (
         <div>
@@ -15,12 +18,12 @@ function DosenDashboard() {
             <Container fluid>
                 <Row>
                     {/* Render Col hanya jika bukan halaman detail mahasiswa */}
-                    {!isDetailMahasiswa && (
+                    {!hideSideNavbar && (
                         <Col md={2} style={{ paddingLeft: 0, paddingRight: 0 }}>
                             <SideNavbar />
                         </Col>
                     )}
-                    <Col md={isDetailMahasiswa ? 12 : 10} style={{ padding: 20, marginBottom: 40}}>
+                    <Col md={hideSideNavbar ? 12 : 10} style={{ padding: 20, marginBottom: 40}}>
                         <Outlet />
                     </Col>
                 </Row>

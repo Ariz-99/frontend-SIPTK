@@ -3,10 +3,10 @@ import { Form, Button } from 'react-bootstrap';
 import { BsPersonCircle } from "react-icons/bs";
 import { IoIosSave } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
-import './DetailMahasiswa.css'
+import './ProfileDosen.css'
 
 
-function DetailMahasiswa({ mahasiswaId }) {
+function ProfileDosen() {
     // Di sini Anda dapat melakukan logika untuk mengambil detail mahasiswa berdasarkan ID dari backend atau dari data yang sudah Anda miliki
 
     // Contoh penggunaan:
@@ -18,17 +18,17 @@ function DetailMahasiswa({ mahasiswaId }) {
 
     // Handle klik tombol "Back"
     const handleBack = () => {
-        navigate('/dosen/perwalian'); // Mengarahkan ke path '/dosen/perwalian'
+        navigate('/dosen'); // Mengarahkan ke path '/dosen/perwalian'
     };
 
     return (
         <div className="detail-container">
             <div className="btn-back">
-                <Button variant="secondary" onClick={handleBack}  >Back</Button>
+                <Button variant="primary" onClick={handleBack}  >Back</Button>
             </div>
             <div className="prwln-box">
                 <div className="icon-text-container-center">
-                    <h5>Perwalian</h5>
+                    <h5>Profile</h5>
                 </div>
                 <hr />
                 <div className='icon-form-container'>
@@ -42,19 +42,7 @@ function DetailMahasiswa({ mahasiswaId }) {
                                 <Form.Control type="name" />
                             </Form.Group>
                             <Form.Group className="mb-3" style={{textAlign: 'left'}}>
-                                <Form.Label>NIM :</Form.Label>
-                                <Form.Control type="name" />
-                            </Form.Group>
-                            <Form.Group className="mb-3" style={{textAlign: 'left'}}>
-                                <Form.Label>IPk :</Form.Label>
-                                <Form.Control type="name" />
-                            </Form.Group>
-                            <Form.Group className="mb-3" style={{textAlign: 'left'}}>
-                                <Form.Label>SKS :</Form.Label>
-                                <Form.Control type="name" />
-                            </Form.Group>
-                            <Form.Group className="mb-3" style={{textAlign: 'left'}}>
-                                <Form.Label>Alamat :</Form.Label>
+                                <Form.Label>NIP :</Form.Label>
                                 <Form.Control type="name" />
                             </Form.Group>
                             <Form.Group className="mb-3" style={{textAlign: 'left'}}>
@@ -62,15 +50,15 @@ function DetailMahasiswa({ mahasiswaId }) {
                                 <Form.Control type="name" />
                             </Form.Group>
                             <Form.Group className="mb-3" style={{textAlign: 'left'}}>
-                                <Form.Label>Uraian :</Form.Label>
+                                <Form.Label>Alamat :</Form.Label>
                                 <Form.Control type="name" />
                             </Form.Group>
                             <Form.Group className="mb-3" style={{textAlign: 'left'}}>
-                                <Form.Label>Masalah Akademik :</Form.Label>
+                                <Form.Label>Prodi :</Form.Label>
                                 <Form.Control type="name" />
                             </Form.Group>
                             <Form.Group className="mb-3" style={{textAlign: 'left'}}>
-                                <Form.Label>Rekomendasi :</Form.Label>
+                                <Form.Label>Fakultas :</Form.Label>
                                 <Form.Control type="name" />
                             </Form.Group>
                         </Form>
@@ -84,4 +72,4 @@ function DetailMahasiswa({ mahasiswaId }) {
     );
 }
 
-export default DetailMahasiswa;
+export default ProfileDosen;

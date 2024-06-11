@@ -124,9 +124,9 @@ function PerwalianDosen() {
                                             />
                                         </Form>
                                     </div>
-                                    {/* Tabel untuk menampilkan data mahasiswa */}
+                                    {/* Tabel untuk menampilkan Permintaan Perwalian */}
                                     <Table responsive="sm" striped bordered hover>
-                                    <thead text-align= ''>
+                                        <thead text-align= ''>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama</th>
@@ -153,7 +153,7 @@ function PerwalianDosen() {
                                                         {mhs.status === 'tidak aman' && <RiAlarmWarningFill color="red" />}
                                                     </td>
                                                     <td>
-                                                        <Button variant='danger'><BsFiletypePdf /> Download PDF/Print</Button>
+                                                        <BsFolderSymlinkFill onClick={() => handleDetailClick(mhs.id)} style={{ cursor: 'pointer' }} />
                                                     </td>
                                                 </tr>
                                             ))}
@@ -185,7 +185,7 @@ function PerwalianDosen() {
                             </Card>
                         </Tab>
                         <Tab eventKey="permintaan-perwalian" title="Permintaan Perwalian">
-                        <Card>
+                            <Card>
                                 <Card.Body>
                                     <div className="d-flex justify-content-end mb-3">
                                         <Form className="d-flex">
@@ -277,9 +277,9 @@ function PerwalianDosen() {
                                             />
                                         </Form>
                                     </div>
-                                    {/* Tabel untuk menampilkan Permintaan Perwalian */}
+                                    {/* Tabel untuk menampilkan data mahasiswa */}
                                     <Table responsive="sm" striped bordered hover>
-                                        <thead text-align= ''>
+                                    <thead text-align= ''>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama</th>
@@ -306,7 +306,7 @@ function PerwalianDosen() {
                                                         {mhs.status === 'tidak aman' && <RiAlarmWarningFill color="red" />}
                                                     </td>
                                                     <td>
-                                                        <BsFolderSymlinkFill onClick={() => handleDetailClick(mhs.id)} style={{ cursor: 'pointer' }} />
+                                                        <Button variant='danger'><BsFiletypePdf /> Download PDF/Print</Button>
                                                     </td>
                                                 </tr>
                                             ))}
@@ -324,7 +324,6 @@ function PerwalianDosen() {
                                                         <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
                                                     </Dropdown.Menu>
                                                 </Dropdown>
-                                                &nbsp; Mahasiswa per Halaman
                                             </div>
                                             <Pagination>
                                                 {Array.from({ length: Math.ceil(filteredMahasiswa.length / mahasiswaPerPage) }, (_, i) => (

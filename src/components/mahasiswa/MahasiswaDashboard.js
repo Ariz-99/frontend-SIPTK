@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Outlet, useMatch } from 'react-router-dom';
 import SideNavbar from './common/SideNavbarMahasiswa';
 import Header from '../shared/header/header';
@@ -7,7 +7,10 @@ import Footer from '../shared/footer/footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function StudentDashboard() {
-    const isSurveiMahasiswa = useMatch('/mahasiswa/survei-mahasiswa/');
+    const isSurveiMahasiswa = useMatch('/mahasiswa/survei-mahasiswa/*');
+    const isProfile = useMatch('/mahasiswa/profil/*');
+
+    const hideSideNavbar = isSurveiMahasiswa || isProfile;
 
     return (
         <div>
@@ -15,12 +18,12 @@ function StudentDashboard() {
             <Container fluid>
                 <Row>
                     {/* Render Col hanya jika bukan halaman detail mahasiswa */}
-                    {!isSurveiMahasiswa && (
+                    {!hideSideNavbar && (
                         <Col md={2} style={{ paddingLeft: 0, paddingRight: 0 }}>
                             <SideNavbar />
                         </Col>
                     )}
-                    <Col md={isSurveiMahasiswa ? 12 : 10} style={{ padding: 20, marginBottom: 40}}>
+                    <Col md={hideSideNavbar ? 12 : 10} style={{ padding: 20, marginBottom: 40 }}>
                         <Outlet />
                     </Col>
                 </Row>
