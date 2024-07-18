@@ -12,7 +12,6 @@ import DosenHome from './components/dosen/DosenHome/DosenHome.js'
 import ProfileDosen from './components/dosen/Profile/ProfileDosen.js';
 import PengumumanDosen from './components/dosen/Pengumuman/PengumumanDosen.js'
 import PerwalianDosen from './components/dosen/Perwalian/PerwalianDosen.js'
-import DetailMahasiswa from './components/dosen/Perwalian/DetailMahasiswa/DetailMahasiswa.js';
 import JadwalPerwalianDosen from './components/dosen/JadwalPerwalian/JadwalPerwalianDosen.js'
 import GPMDashboard from './components/gpm/GpmDashboard';
 import GPMHome from './components/gpm/GPMHome/GPMHome.js';
@@ -47,7 +46,6 @@ function App() {
             <Route path="pengumuman" element={<PengumumanDosen />} />
             <Route path="perwalian" element={<PerwalianDosen />} />
             <Route path="jadwal-perwalian" element={<JadwalPerwalianDosen />} />
-            <Route path="perwalian/detail/:mahasiswaId" element={<DetailMahasiswa />} />
           </Route>
         <Route path="/gpm" element={<GPMDashboard />}>
           <Route index element={<GPMHome />} />

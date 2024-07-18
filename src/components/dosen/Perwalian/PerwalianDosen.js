@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Tab, Tabs, Container, Row, Col, Card, Button, Form, FormControl, Table, Pagination, Dropdown } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Tab, Tabs, Container, Row, Col, Card, Button, Form, FormControl, Table, Pagination, Dropdown, Modal } from 'react-bootstrap';
 import { BsFiletypePdf, BsCheckCircle, BsFolderSymlinkFill } from "react-icons/bs";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { RiAlarmWarningFill } from "react-icons/ri";
@@ -11,6 +11,10 @@ function PerwalianDosen() {
     const [filteredMahasiswa, setFilteredMahasiswa] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [mahasiswaPerPage, setMahasiswaPerPage] = useState(20);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedMahasiswa, setSelectedMahasiswa] = useState({});
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [selectedMahasiswaForUpdate, setSelectedMahasiswaForUpdate] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,10 +26,7 @@ function PerwalianDosen() {
 
     }, [searchTerm]);
 
-    const handleDetailClick = (MahasiswaId) => {
-        // Menggunakan fungsi navigate untuk navigasi ke halaman detail
-        navigate(`/dosen/perwalian/detail/${MahasiswaId}`);
-    };
+
 
     const Mahasiswa = [
         { id: 1, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman', date: 'Senin, 29 April 2024', uraian: 'Awal Kuliah', problem: 'Sulit Belajar', clock: '07.00' },
@@ -90,6 +91,24 @@ function PerwalianDosen() {
         { id: 60, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
     ];
 
+    const openModal = (mhs) => {
+        setSelectedMahasiswa(mhs);
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
+    const openUpdateModal = (mhs) => {
+        setSelectedMahasiswaForUpdate(mhs);
+        setShowUpdateModal(true);
+    };
+
+    const closeUpdateModal = () => {
+        setShowUpdateModal(false);
+    };
+
     // Mengatur index data mahasiswa pertama dan terakhir pada setiap halaman
     const indexOfLastMahasiswa = currentPage * mahasiswaPerPage;
     const indexOfFirstMahasiswa = indexOfLastMahasiswa - mahasiswaPerPage;
@@ -153,7 +172,7 @@ function PerwalianDosen() {
                                                         {mhs.status === 'tidak aman' && <RiAlarmWarningFill color="red" />}
                                                     </td>
                                                     <td>
-                                                        <BsFolderSymlinkFill onClick={() => handleDetailClick(mhs.id)} style={{ cursor: 'pointer' }} />
+                                                        <BsFolderSymlinkFill style={{ cursor: 'pointer' }} onClick={() => openModal(mhs)} />
                                                     </td>
                                                 </tr>
                                             ))}
@@ -230,8 +249,7 @@ function PerwalianDosen() {
                                                         {mhs.status === 'tidak aman' && <RiAlarmWarningFill color="red" />}
                                                     </td>
                                                     <td>
-                                                        <Button variant='danger' style={{ marginRight: '5px' }}><IoMdCloseCircleOutline /> Reject</Button>
-                                                        <Button variant='success'><BsCheckCircle /> Approve</Button>
+                                                        <Button variant='warning' onClick={() => openUpdateModal(mhs)}>Update</Button>
                                                     </td>
                                                 </tr>
                                             ))}
@@ -339,6 +357,53 @@ function PerwalianDosen() {
                     </Tabs>
                 </div>
             </div>
+            <Modal show={showModal} onHide={closeModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Data Mahasiswa</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Nama: {selectedMahasiswa.name}</p>
+                    <p>NIM: {selectedMahasiswa.nim}</p>
+                    <p>IPK: {selectedMahasiswa.ipk}</p>
+                    <p>SKS: {selectedMahasiswa.sks}</p>
+                    <p>Alamat: {selectedMahasiswa.address}</p>
+                    <p>Nomor HP: {selectedMahasiswa.phone}</p>
+                    <p>Uraian: {selectedMahasiswa.uraian}</p>
+                    <p>Masalah Akademik: {selectedMahasiswa.problem}</p>
+                    <p>Rekomendasi: {selectedMahasiswa.recommend}</p>
+                </Modal.Body>
+                <Modal.Footer>
+
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showUpdateModal} onHide={closeUpdateModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Update Permintaan Perwalian</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Nama: {selectedMahasiswa.name}</p>
+                    <p>NIM: {selectedMahasiswa.nim}</p>
+                    <p>IPK: {selectedMahasiswa.ipk}</p>
+                    <p>SKS: {selectedMahasiswa.sks}</p>
+                    <p>Alamat: {selectedMahasiswa.address}</p>
+                    <p>Nomor HP: {selectedMahasiswa.phone}</p>
+                    <p>Uraian: {selectedMahasiswa.uraian}</p>
+                    <p>Masalah Akademik: {selectedMahasiswa.problem}</p>
+                    <Form>
+                        {/* Tambahkan form untuk melakukan update */}
+                        <Form.Group className="mb-3">
+                            <Form.Label>Rekomendasi</Form.Label>
+                            <Form.Control as="textarea" rows={3} defaultValue={selectedMahasiswaForUpdate.recommend} />
+                        </Form.Group>
+                        {/* Tambahan input lainnya sesuai kebutuhan */}
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary">
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
