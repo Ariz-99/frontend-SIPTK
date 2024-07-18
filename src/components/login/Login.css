@@ -1,0 +1,174 @@
+.login-container {
+    display: flex;
+    height: 100vh;
+    flex-direction: row;
+}
+
+.login-image {
+    flex: 1;
+    background: url('./image/tekkom.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.login-form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 40px;
+}
+
+.logo-undip {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.login-form-container h3,
+.login-form-container p {
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+.login-form-container h3 {
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #333;
+}
+
+.login-form-container p {
+    margin-bottom: 40px;
+    font-weight: 400;
+    color: #555;
+    font-size: 20px;
+}
+
+.divider {
+    width: 100%;
+    border: 1px solid #000000;
+    margin-bottom: 20px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.role-button {
+    background-color: #4E52BE;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1 1 auto;
+    max-width: 100px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px; 
+}
+
+.role-button.active {
+    background-color: #003c7b;
+}
+
+.role-button:hover {
+    background-color: #0056b3;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.input-icon {
+    margin-right: 10px;
+    color: #555;
+}
+
+.input-group input {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 10px;
+}
+
+button[type="submit"] {
+    width: 150px; 
+    padding: 10px; 
+    background-color: #4E52BE;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+    text-align: center;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+    }
+
+    .login-image {
+        height: 50vh;
+        flex: none;
+    }
+
+    .login-form-container {
+        padding: 20px;
+    }
+
+    .button-group {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .role-button {
+        max-width: 100px; 
+    }
+
+    .input-group {
+        max-width: 100%;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-image {
+        height: 40vh;
+    }
+
+    .login-form-container p {
+        font-size: 18px;
+    }
+}

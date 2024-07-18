@@ -24,6 +24,7 @@ import DataMahasiswa from './components/admin/DataMahasiswa/DataMahasiswa.js';
 import DataDosen from './components/admin/DataDosen/DataDosen.js';
 import DataGPM from './components/admin/DataGPM/DataGPM.js'
 import ImportData from './components/admin/ImportData/ImportData.js';
+import Login from './components/login/Login.js';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
   return (
     <Router>
       <Routes>
+      <Route path="/login" element={<Login />} />
         <Route path="/Mahasiswa" element={<MahasiswaDashboard />}>
           <Route index element={<MahasiswaHome />} />
             <Route path="profil" element={<ProfileMahasiswa />} />

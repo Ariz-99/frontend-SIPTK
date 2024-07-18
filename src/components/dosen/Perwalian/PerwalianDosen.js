@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef}from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tab, Tabs, Container, Row, Col, Card, Button, Form, FormControl, Table, Pagination, Dropdown } from 'react-bootstrap';
 import { BsFiletypePdf, BsCheckCircle, BsFolderSymlinkFill } from "react-icons/bs";
 import { IoMdCloseCircleOutline } from "react-icons/io";
@@ -15,20 +15,20 @@ function PerwalianDosen() {
 
     useEffect(() => {
         const results = Mahasiswa.filter(Mahasiswa =>
-            Mahasiswa.name.toLowerCase().includes(searchTerm.toLowerCase())||
+            Mahasiswa.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             Mahasiswa.nim.includes(searchTerm)
         );
         setFilteredMahasiswa(results);
-        
+
     }, [searchTerm]);
-    
+
     const handleDetailClick = (MahasiswaId) => {
         // Menggunakan fungsi navigate untuk navigasi ke halaman detail
         navigate(`/dosen/perwalian/detail/${MahasiswaId}`);
     };
 
     const Mahasiswa = [
-        { id: 1, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman', date:'Senin, 29 April 2024', uraian: 'Awal Kuliah', problem: 'Sulit Belajar', clock:'07.00' },
+        { id: 1, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman', date: 'Senin, 29 April 2024', uraian: 'Awal Kuliah', problem: 'Sulit Belajar', clock: '07.00' },
         { id: 2, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
         { id: 3, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
         { id: 4, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
@@ -126,7 +126,7 @@ function PerwalianDosen() {
                                     </div>
                                     {/* Tabel untuk menampilkan Permintaan Perwalian */}
                                     <Table responsive="sm" striped bordered hover>
-                                        <thead text-align= ''>
+                                        <thead text-align=''>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama</th>
@@ -159,28 +159,28 @@ function PerwalianDosen() {
                                             ))}
                                         </tbody>
                                     </Table>
-                                        <div className="d-flex justify-content-between">
-                                            <div>
-                                                <Dropdown>
-                                                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                        {mahasiswaPerPage}
-                                                    </Dropdown.Toggle>
-                                                    <Dropdown.Menu>
-                                                        <Dropdown.Item onClick={() => setMahasiswaPerPage(20)}>20</Dropdown.Item>
-                                                        <Dropdown.Item onClick={() => setMahasiswaPerPage(50)}>50</Dropdown.Item>
-                                                        <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
-                                                &nbsp; Mahasiswa per Halaman
-                                            </div>
-                                            <Pagination>
-                                                {Array.from({ length: Math.ceil(filteredMahasiswa.length / mahasiswaPerPage) }, (_, i) => (
-                                                    <Pagination.Item key={i + 1} onClick={() => paginate(i + 1)} active={i + 1 === currentPage}>
-                                                        {i + 1}
-                                                    </Pagination.Item>
-                                                ))}
-                                            </Pagination>
+                                    <div className="d-flex justify-content-between">
+                                        <div>
+                                            <Dropdown>
+                                                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                                    {mahasiswaPerPage}
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(20)}>20</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(50)}>50</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+                                            &nbsp; Mahasiswa per Halaman
                                         </div>
+                                        <Pagination>
+                                            {Array.from({ length: Math.ceil(filteredMahasiswa.length / mahasiswaPerPage) }, (_, i) => (
+                                                <Pagination.Item key={i + 1} onClick={() => paginate(i + 1)} active={i + 1 === currentPage}>
+                                                    {i + 1}
+                                                </Pagination.Item>
+                                            ))}
+                                        </Pagination>
+                                    </div>
                                 </Card.Body>
                             </Card>
                         </Tab>
@@ -201,7 +201,7 @@ function PerwalianDosen() {
                                     </div>
                                     {/* Tabel untuk menampilkan Permintaan Perwalian */}
                                     <Table responsive="sm" striped bordered hover>
-                                    <thead text-align= ''>
+                                        <thead text-align=''>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Hari</th>
@@ -230,35 +230,35 @@ function PerwalianDosen() {
                                                         {mhs.status === 'tidak aman' && <RiAlarmWarningFill color="red" />}
                                                     </td>
                                                     <td>
-                                                    <Button variant='danger' style={{ marginRight: '5px' }}><IoMdCloseCircleOutline /> Reject</Button>
-                                                    <Button variant='success'><BsCheckCircle /> Approve</Button>
+                                                        <Button variant='danger' style={{ marginRight: '5px' }}><IoMdCloseCircleOutline /> Reject</Button>
+                                                        <Button variant='success'><BsCheckCircle /> Approve</Button>
                                                     </td>
                                                 </tr>
                                             ))}
                                         </tbody>
                                     </Table>
-                                        <div className="d-flex justify-content-between">
-                                            <div>
-                                                <Dropdown>
-                                                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                        {mahasiswaPerPage}
-                                                    </Dropdown.Toggle>
-                                                    <Dropdown.Menu>
-                                                        <Dropdown.Item onClick={() => setMahasiswaPerPage(20)}>20</Dropdown.Item>
-                                                        <Dropdown.Item onClick={() => setMahasiswaPerPage(50)}>50</Dropdown.Item>
-                                                        <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
-                                                &nbsp; Mahasiswa per Halaman
-                                            </div>
-                                            <Pagination>
-                                                {Array.from({ length: Math.ceil(filteredMahasiswa.length / mahasiswaPerPage) }, (_, i) => (
-                                                    <Pagination.Item key={i + 1} onClick={() => paginate(i + 1)} active={i + 1 === currentPage}>
-                                                        {i + 1}
-                                                    </Pagination.Item>
-                                                ))}
-                                            </Pagination>
+                                    <div className="d-flex justify-content-between">
+                                        <div>
+                                            <Dropdown>
+                                                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                                    {mahasiswaPerPage}
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(20)}>20</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(50)}>50</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+                                            &nbsp; Mahasiswa per Halaman
                                         </div>
+                                        <Pagination>
+                                            {Array.from({ length: Math.ceil(filteredMahasiswa.length / mahasiswaPerPage) }, (_, i) => (
+                                                <Pagination.Item key={i + 1} onClick={() => paginate(i + 1)} active={i + 1 === currentPage}>
+                                                    {i + 1}
+                                                </Pagination.Item>
+                                            ))}
+                                        </Pagination>
+                                    </div>
                                 </Card.Body>
                             </Card>
                         </Tab>
@@ -279,7 +279,7 @@ function PerwalianDosen() {
                                     </div>
                                     {/* Tabel untuk menampilkan data mahasiswa */}
                                     <Table responsive="sm" striped bordered hover>
-                                    <thead text-align= ''>
+                                        <thead text-align=''>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama</th>
@@ -312,27 +312,27 @@ function PerwalianDosen() {
                                             ))}
                                         </tbody>
                                     </Table>
-                                        <div className="d-flex justify-content-between">
-                                            <div>
-                                                <Dropdown>
-                                                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                        {mahasiswaPerPage}
-                                                    </Dropdown.Toggle>
-                                                    <Dropdown.Menu>
-                                                        <Dropdown.Item onClick={() => setMahasiswaPerPage(20)}>20</Dropdown.Item>
-                                                        <Dropdown.Item onClick={() => setMahasiswaPerPage(50)}>50</Dropdown.Item>
-                                                        <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
-                                            </div>
-                                            <Pagination>
-                                                {Array.from({ length: Math.ceil(filteredMahasiswa.length / mahasiswaPerPage) }, (_, i) => (
-                                                    <Pagination.Item key={i + 1} onClick={() => paginate(i + 1)} active={i + 1 === currentPage}>
-                                                        {i + 1}
-                                                    </Pagination.Item>
-                                                ))}
-                                            </Pagination>
+                                    <div className="d-flex justify-content-between">
+                                        <div>
+                                            <Dropdown>
+                                                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                                    {mahasiswaPerPage}
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(20)}>20</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(50)}>50</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
                                         </div>
+                                        <Pagination>
+                                            {Array.from({ length: Math.ceil(filteredMahasiswa.length / mahasiswaPerPage) }, (_, i) => (
+                                                <Pagination.Item key={i + 1} onClick={() => paginate(i + 1)} active={i + 1 === currentPage}>
+                                                    {i + 1}
+                                                </Pagination.Item>
+                                            ))}
+                                        </Pagination>
+                                    </div>
                                 </Card.Body>
                             </Card>
                         </Tab>
