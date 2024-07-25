@@ -2,8 +2,8 @@ import React from 'react';
 import { Nav, Button, Card } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { BsPersonCircle, BsBellFill, BsClipboard2Check, BsSpeedometer2 } from "react-icons/bs";
-import { FaFileExport } from "react-icons/fa6";
-import { TbLogout2 } from "react-icons/tb";
+import { IoLogOutSharp } from "react-icons/io5";
+import { GrDownload } from "react-icons/gr";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './SideNavbarAdmin.css'
 
@@ -37,13 +37,13 @@ function SideNavbar() {
                 </Button>
                 <Button className="custom-button" variant='secondary'>
                     <LinkContainer to="/admin/import-data">
-                        <Nav.Link className="sidebar-link"><FaFileExport className="me-2 sidebar-link" size="20px"/>Import Data</Nav.Link>
+                        <Nav.Link className="sidebar-link"><GrDownload className="me-2 sidebar-link" size="20px"/>Import Data</Nav.Link>
                     </LinkContainer>
                 </Button>
             </div>
             <div className='custom-logout'>
                 <LinkContainer to="/login">
-                    <Nav.Link className='custom-logout-text'><TbLogout2 className="me-2" size="20px"/>Log Out</Nav.Link>
+                    <Nav.Link className='custom-logout-text'><IoLogOutSharp className="me-2" size="20px"/>Log Out</Nav.Link>
                 </LinkContainer>
             </div>
         </Nav>

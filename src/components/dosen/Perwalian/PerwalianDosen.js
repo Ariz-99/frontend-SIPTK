@@ -378,7 +378,7 @@ function PerwalianDosen() {
             </Modal>
             <Modal show={showUpdateModal} onHide={closeUpdateModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Update Permintaan Perwalian</Modal.Title>
+                    <Modal.Title>Data Mahasiswa</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Nama: {selectedMahasiswa.name}</p>
@@ -392,7 +392,7 @@ function PerwalianDosen() {
                     <Form>
                         {/* Tambahkan form untuk melakukan update */}
                         <Form.Group className="mb-3">
-                            <Form.Label>Rekomendasi</Form.Label>
+                            <Form.Label>Rekomendasi: </Form.Label>
                             <Form.Control as="textarea" rows={3} defaultValue={selectedMahasiswaForUpdate.recommend} />
                         </Form.Group>
                         {/* Tambahan input lainnya sesuai kebutuhan */}

@@ -68,7 +68,6 @@ function PengumumanMahasiswa(){
                 </div>
             </div>
         </div>
-        
     );
 }
 
