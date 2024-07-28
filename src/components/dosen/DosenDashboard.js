@@ -17,7 +17,6 @@ function DosenDashboard() {
             <Header />
             <Container fluid>
                 <Row>
-                    {/* Render Col hanya jika bukan halaman detail mahasiswa */}
                     {!hideSideNavbar && (
                         <Col md={2} style={{ paddingLeft: 0, paddingRight: 0 }}>
                             <SideNavbar />

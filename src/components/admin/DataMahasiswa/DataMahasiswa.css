@@ -1,19 +1,98 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
 
+.data-mhs-box {
+    width: 100%;
+    background-color: #F9F9F9;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
 .card-header h3 {
     font-weight: bold;
-    font-family: 'Open Sans', sans-serif;; 
-    text-align: center; 
-    width: 100%; 
+    font-family: 'Open Sans', sans-serif;
+    ;
+    text-align: center;
+    width: 100%;
     margin-bottom: 0.5rem;
     text-shadow: 2px 1px 0px #b6b0b0, 3px 3px 0px rgba(255, 255, 255, 0.1);
 }
 
 .card {
     margin-top: 20px;
-    box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);  
+    box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
-.table td, .table th {
+.table td,
+.table th {
     text-align: center;
+}
+
+.table-cell-ellipsis {
+    white-space: nowrap;       /* Prevents text from wrapping */
+    overflow: hidden;          /* Hides the overflowed text */
+    text-overflow: ellipsis;   /* Shows ellipsis (...) for overflowed text */
+}
+
+.d-flex .btn + .btn {
+    margin-left: 10px; /* Adjust the margin as needed */
+}
+
+.small-btn {
+    padding: 0.15rem 0.25rem; /* Adjust padding as needed */
+    font-size: 0.6rem;      /* Adjust font size as needed */
+}
+
+.modal-body-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.modal-profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.modal-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.modal-info-row {
+    display: flex;
+    margin-bottom: 5px;
+    /* optional, for spacing between rows */
+}
+
+.modal-info-label {
+    width: 120px;
+    font-weight: bold;
+}
+
+.modal-info-value {
+    flex: 1;
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+}
+
+.password-input {
+    flex: 1;
+}
+
+.eye-icon {
+    margin-left: 5px;
+    cursor: pointer;
 }

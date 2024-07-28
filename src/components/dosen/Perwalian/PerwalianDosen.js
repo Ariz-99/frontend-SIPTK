@@ -16,6 +16,7 @@ function PerwalianDosen() {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [selectedMahasiswaForUpdate, setSelectedMahasiswaForUpdate] = useState({});
     const navigate = useNavigate();
+    const [recommendation, setRecommendation] = useState(selectedMahasiswa.recommend || '');
 
     useEffect(() => {
         const results = Mahasiswa.filter(Mahasiswa =>
@@ -116,6 +117,10 @@ function PerwalianDosen() {
 
     // Mengubah halaman
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const handleRecommendationChange = (e) => {
+        setRecommendation(e.target.value);
+      };
 
     return (
         <div>
@@ -362,15 +367,55 @@ function PerwalianDosen() {
                     <Modal.Title>Data Mahasiswa</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Nama: {selectedMahasiswa.name}</p>
-                    <p>NIM: {selectedMahasiswa.nim}</p>
-                    <p>IPK: {selectedMahasiswa.ipk}</p>
-                    <p>SKS: {selectedMahasiswa.sks}</p>
-                    <p>Alamat: {selectedMahasiswa.address}</p>
-                    <p>Nomor HP: {selectedMahasiswa.phone}</p>
-                    <p>Uraian: {selectedMahasiswa.uraian}</p>
-                    <p>Masalah Akademik: {selectedMahasiswa.problem}</p>
-                    <p>Rekomendasi: {selectedMahasiswa.recommend}</p>
+                    <div className="modal-body-container">
+                        <img
+                            src={selectedMahasiswa.profilePicture}
+                            alt="Profile"
+                            className="modal-profile-picture"
+                        />
+                        <div className="modal-info">
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Nama</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.name}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">NIM</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.nim}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Dosen Wali</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.Dwali}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">IPK</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.ipk}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">SKS</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.sks}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Alamat</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.address}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Nomor HP</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.phone}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Prodi</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.prodi}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Fakultas</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.faculty}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Semester</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.semester}</span>
+                            </div>
+                        </div>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
 
@@ -381,22 +426,61 @@ function PerwalianDosen() {
                     <Modal.Title>Data Mahasiswa</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Nama: {selectedMahasiswa.name}</p>
-                    <p>NIM: {selectedMahasiswa.nim}</p>
-                    <p>IPK: {selectedMahasiswa.ipk}</p>
-                    <p>SKS: {selectedMahasiswa.sks}</p>
-                    <p>Alamat: {selectedMahasiswa.address}</p>
-                    <p>Nomor HP: {selectedMahasiswa.phone}</p>
-                    <p>Uraian: {selectedMahasiswa.uraian}</p>
-                    <p>Masalah Akademik: {selectedMahasiswa.problem}</p>
-                    <Form>
-                        {/* Tambahkan form untuk melakukan update */}
-                        <Form.Group className="mb-3">
-                            <Form.Label>Rekomendasi: </Form.Label>
-                            <Form.Control as="textarea" rows={3} defaultValue={selectedMahasiswaForUpdate.recommend} />
-                        </Form.Group>
-                        {/* Tambahan input lainnya sesuai kebutuhan */}
-                    </Form>
+                    <div className="modal-body-container">
+                        <img
+                            src={selectedMahasiswa.profilePicture}
+                            alt="Profile"
+                            className="modal-profile-picture"
+                        />
+                        <div className="modal-info">
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Nama</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.name}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">NIM</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.nim}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Dosen Wali</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.Dwali}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">IPK</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.ipk}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">SKS</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.sks}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Alamat</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.address}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Nomor HP</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.phone}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Uraian</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.uraian}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Masalah Akademik</span>
+                                <span className="modal-info-value">: {selectedMahasiswa.problem}</span>
+                            </div>
+                            <div className="modal-info-row">
+                                <span className="modal-info-label">Rekomendasi</span>
+                                <textarea
+                                    className="modal-info-value"
+                                    value={recommendation}
+                                    onChange={handleRecommendationChange}
+                                    rows="4" 
+                                    style={{ width: '100%' }}
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary">
