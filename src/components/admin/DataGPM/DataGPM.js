@@ -89,7 +89,7 @@ function DataDosen() {
                                                 <BsFolderSymlinkFill style={{ cursor: 'pointer' }} onClick={() => openModal(Gpm)} />
                                             </td>
                                             <td>
-                                                <div className='d-flex'>
+                                                <div className='d-flex' style={{ justifyContent:'center'}}>
                                                     <Button
                                                         className='small-btn'
                                                         variant="danger"

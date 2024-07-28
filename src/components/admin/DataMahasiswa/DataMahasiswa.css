@@ -51,7 +51,7 @@
 
 .modal-body-container {
     display: flex;
-    align-items: flex-start;
+    justify-content: space-around;
 }
 
 .modal-profile-picture {
@@ -71,7 +71,6 @@
 .modal-info-row {
     display: flex;
     margin-bottom: 5px;
-    /* optional, for spacing between rows */
 }
 
 .modal-info-label {

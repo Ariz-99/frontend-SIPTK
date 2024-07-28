@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, FormControl, Table, Dropdown, DropdownButton, Pagination, Modal, Button } from 'react-bootstrap';
 import { BsFolderSymlinkFill } from "react-icons/bs";
+import { BsPersonCircle } from "react-icons/bs";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import './DataMahasiswa.css';
 
@@ -181,7 +182,6 @@ function DataMahasiswa() {
                                         </th>
                                         <th></th>
                                         <th></th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -254,10 +254,10 @@ function DataMahasiswa() {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="modal-body-container">
-                        <img
-                            src={selectedMahasiswa.profilePicture}
-                            alt="Profile"
-                            className="modal-profile-picture"
+                        <BsPersonCircle
+                            className="modal-profile-icon"
+                            size={70} // Sesuaikan ukuran ikon
+                            color="#555" // Sesuaikan warna ikon
                         />
                         <div className="modal-info">
                             <div className="modal-info-row">
