@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tab, Tabs, Container, Row, Col, Card, Button, Form, FormControl, Table, Pagination, Dropdown, Modal } from 'react-bootstrap';
+import { Tab, Tabs, Container, Row, Col, Card, Button, Form, FormControl, Table, Pagination, Dropdown, DropdownButton, Modal } from 'react-bootstrap';
 import { BsFiletypePdf, BsCheckCircle, BsFolderSymlinkFill } from "react-icons/bs";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { RiAlarmWarningFill } from "react-icons/ri";
@@ -18,78 +18,86 @@ function PerwalianDosen() {
     const navigate = useNavigate();
     const [recommendation, setRecommendation] = useState(selectedMahasiswa.recommend || '');
 
+    const [nimFilter, setNimFilter] = useState('');
+    const [nameFilter, setNameFilter] = useState('');
+    const [semesterFilter, setSemesterFilter] = useState('');
+    const [alertFilter, setAlertFilter] = useState('semua');
+    const [statusFilter, setStatusFilter] = useState('semua');
+
     useEffect(() => {
-        const results = Mahasiswa.filter(Mahasiswa =>
-            Mahasiswa.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            Mahasiswa.nim.includes(searchTerm)
+        const results = Mahasiswa.filter(mhs =>
+            (alertFilter === 'semua' || mhs.alert === alertFilter) &&
+            (statusFilter === 'semua' || mhs.status === statusFilter) &&
+            (nimFilter === '' || mhs.nim.includes(nimFilter)) &&
+            (nameFilter === '' || mhs.name.toLowerCase().includes(nameFilter.toLowerCase())) &&
+            (semesterFilter === '' || mhs.semester.toString() === semesterFilter)
         );
         setFilteredMahasiswa(results);
-
-    }, [searchTerm]);
+    }, [nimFilter, nameFilter, semesterFilter, alertFilter]);
 
 
 
     const Mahasiswa = [
-        { id: 1, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman', date: 'Senin, 29 April 2024', uraian: 'Awal Kuliah', problem: 'Sulit Belajar', clock: '07.00' },
-        { id: 2, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 3, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 4, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 5, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 6, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 7, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 8, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 9, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 10, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 11, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 12, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 13, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 14, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 15, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 16, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 17, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 18, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 19, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 20, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 21, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 22, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 23, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 24, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 25, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 26, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 27, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 28, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 29, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 30, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 31, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 32, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 33, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 34, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 35, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 36, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 37, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 38, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 39, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 40, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 41, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 42, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 43, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 44, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 45, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 46, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 47, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 48, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 49, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 50, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 51, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 52, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 53, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 54, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 55, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 56, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 57, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
-        { id: 58, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', status: 'aman' },
-        { id: 59, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', status: 'kendala' },
-        { id: 60, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
+        { id: 1, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman', date: 'Senin, 29 April 2024', uraian: 'Awal Kuliah', problem: 'Sulit Belajar', clock: '07.00' },
+        { id: 2, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 3, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 4, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 5, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 6, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 7, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 8, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 9, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 10, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 11, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 12, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 13, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 14, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 15, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 16, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 17, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 18, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 19, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 20, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 21, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 22, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 23, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 24, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 25, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 26, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 27, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 28, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 29, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 30, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 31, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 32, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 33, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 34, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 35, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 36, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 37, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 38, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 39, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 40, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 41, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 42, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 43, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 44, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 45, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 46, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 47, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 48, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 49, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 50, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 51, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 52, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 53, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 54, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 55, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 56, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 57, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
+        { id: 58, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman' },
+        { id: 59, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
+        { id: 60, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', alert: 'tidak aman' },
     ];
 
     const openModal = (mhs) => {
@@ -120,7 +128,7 @@ function PerwalianDosen() {
 
     const handleRecommendationChange = (e) => {
         setRecommendation(e.target.value);
-      };
+    };
 
     return (
         <div>
@@ -136,46 +144,80 @@ function PerwalianDosen() {
                         <Tab eventKey="data-mahasiswa" title="Data Mahasiswa">
                             <Card>
                                 <Card.Body>
-                                    <div className="d-flex justify-content-end mb-3">
-                                        <Form className="d-flex">
-                                            <FormControl
-                                                type="search"
-                                                placeholder="Cari Mahasiswa"
-                                                className="me-2"
-                                                aria-label="Search"
-                                                value={searchTerm}
-                                                onChange={(e) => setSearchTerm(e.target.value)}
-                                            />
-                                        </Form>
-                                    </div>
-                                    {/* Tabel untuk menampilkan Permintaan Perwalian */}
                                     <Table responsive="sm" striped bordered hover>
                                         <thead text-align=''>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
                                                 <th>NIM</th>
+                                                <th>Nama</th>
                                                 <th>Semester</th>
-                                                <th>Alamat</th>
-                                                <th>Nomor HP</th>
+                                                <th>Status</th>
                                                 <th>Peringatan</th>
+                                                <th>Nomor HP</th>
                                                 <th>Detail</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th>
+                                                    <FormControl
+                                                        type="text"
+                                                        placeholder="Filter NIM"
+                                                        className="me-2"
+                                                        value={nimFilter}
+                                                        onChange={(e) => setNimFilter(e.target.value)}
+                                                    />
+                                                </th>
+                                                <th>
+                                                    <FormControl
+                                                        type="text"
+                                                        placeholder="Filter Nama"
+                                                        className="me-2"
+                                                        value={nameFilter}
+                                                        onChange={(e) => setNameFilter(e.target.value)}
+                                                    />
+                                                </th>
+                                                <th>
+                                                    <FormControl
+                                                        type="text"
+                                                        placeholder="Filter Semester"
+                                                        className="me-2"
+                                                        value={semesterFilter}
+                                                        onChange={(e) => setSemesterFilter(e.target.value)}
+                                                    />
+                                                </th>
+                                                <th>
+                                                    <DropdownButton title={statusFilter === 'semua' ? 'semua' : statusFilter} onSelect={setStatusFilter}>
+                                                        <Dropdown.Item eventKey="semua">Semua</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="aktif"> aktif </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="cuti"> cuti </Dropdown.Item>
+                                                    </DropdownButton>
+                                                </th>
+                                                <th>
+                                                    <DropdownButton title={alertFilter === 'semua' ? 'semua' : alertFilter} onSelect={setAlertFilter}>
+                                                        <Dropdown.Item eventKey="semua">Semua</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="aman"><RiAlarmWarningFill color="green" /> Aman </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="kendala"><RiAlarmWarningFill color="orange" /> Terkendala </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="tidak aman"><RiAlarmWarningFill color="red" /> Tidak Aman </Dropdown.Item>
+                                                    </DropdownButton>
+                                                </th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {currentMahasiswa.map((mhs, index) => (
                                                 <tr key={mhs.id}>
                                                     <td>{indexOfFirstMahasiswa + index + 1}</td>
-                                                    <td>{mhs.name}</td>
                                                     <td>{mhs.nim}</td>
+                                                    <td>{mhs.name}</td>
                                                     <td>{mhs.semester}</td>
-                                                    <td>{mhs.address}</td>
-                                                    <td>{mhs.phone}</td>
+                                                    <td>{mhs.status}</td>
                                                     <td>
-                                                        {mhs.status === 'aman' && <RiAlarmWarningFill color="green" />}
-                                                        {mhs.status === 'kendala' && <RiAlarmWarningFill color="orange" />}
-                                                        {mhs.status === 'tidak aman' && <RiAlarmWarningFill color="red" />}
+                                                        {mhs.alert === 'aman' && <RiAlarmWarningFill color="green" />}
+                                                        {mhs.alert === 'kendala' && <RiAlarmWarningFill color="orange" />}
+                                                        {mhs.alert === 'tidak aman' && <RiAlarmWarningFill color="red" />}
                                                     </td>
+                                                    <td>{mhs.phone}</td>
                                                     <td>
                                                         <BsFolderSymlinkFill style={{ cursor: 'pointer' }} onClick={() => openModal(mhs)} />
                                                     </td>
@@ -195,7 +237,6 @@ function PerwalianDosen() {
                                                     <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
-                                            &nbsp; Mahasiswa per Halaman
                                         </div>
                                         <Pagination>
                                             {Array.from({ length: Math.ceil(filteredMahasiswa.length / mahasiswaPerPage) }, (_, i) => (
@@ -211,47 +252,66 @@ function PerwalianDosen() {
                         <Tab eventKey="permintaan-perwalian" title="Permintaan Perwalian">
                             <Card>
                                 <Card.Body>
-                                    <div className="d-flex justify-content-end mb-3">
-                                        <Form className="d-flex">
-                                            <FormControl
-                                                type="search"
-                                                placeholder="Cari Mahasiswa"
-                                                className="me-2"
-                                                aria-label="Search"
-                                                value={searchTerm}
-                                                onChange={(e) => setSearchTerm(e.target.value)}
-                                            />
-                                        </Form>
-                                    </div>
                                     {/* Tabel untuk menampilkan Permintaan Perwalian */}
                                     <Table responsive="sm" striped bordered hover>
                                         <thead text-align=''>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Hari</th>
-                                                <th>Nama</th>
                                                 <th>NIM</th>
+                                                <th>Nama</th>
                                                 <th>Uraian</th>
                                                 <th>Masalah Akademik</th>
                                                 <th>Waktu</th>
                                                 <th>Peringatan</th>
                                                 <th>Aksi</th>
                                             </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th>
+                                                    <FormControl
+                                                        type="text"
+                                                        placeholder="Filter NIM"
+                                                        className="me-2"
+                                                        value={nimFilter}
+                                                        onChange={(e) => setNimFilter(e.target.value)}
+                                                    />
+                                                </th>
+                                                <th>
+                                                    <FormControl
+                                                        type="text"
+                                                        placeholder="Filter Nama"
+                                                        className="me-2"
+                                                        value={nameFilter}
+                                                        onChange={(e) => setNameFilter(e.target.value)}
+                                                    />
+                                                </th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th>
+                                                    <DropdownButton title={alertFilter === 'semua' ? 'semua' : alertFilter} onSelect={setAlertFilter}>
+                                                        <Dropdown.Item eventKey="semua">Semua</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="aman"><RiAlarmWarningFill color="green" /> Aman </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="kendala"><RiAlarmWarningFill color="orange" /> Terkendala </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="tidak aman"><RiAlarmWarningFill color="red" /> Tidak Aman </Dropdown.Item>
+                                                    </DropdownButton>
+                                                </th>
+                                                <th></th>
+                                            </tr>
                                         </thead>
                                         <tbody>
                                             {currentMahasiswa.map((mhs, index) => (
                                                 <tr key={mhs.id}>
                                                     <td>{indexOfFirstMahasiswa + index + 1}</td>
-                                                    <td>{mhs.date}</td>
-                                                    <td>{mhs.name}</td>
                                                     <td>{mhs.nim}</td>
+                                                    <td>{mhs.name}</td>
                                                     <td>{mhs.uraian}</td>
                                                     <td>{mhs.problem}</td>
                                                     <td>{mhs.clock}</td>
                                                     <td>
-                                                        {mhs.status === 'aman' && <RiAlarmWarningFill color="green" />}
-                                                        {mhs.status === 'kendala' && <RiAlarmWarningFill color="orange" />}
-                                                        {mhs.status === 'tidak aman' && <RiAlarmWarningFill color="red" />}
+                                                        {mhs.alert === 'aman' && <RiAlarmWarningFill color="green" />}
+                                                        {mhs.alert === 'kendala' && <RiAlarmWarningFill color="orange" />}
+                                                        {mhs.alert === 'tidak aman' && <RiAlarmWarningFill color="red" />}
                                                     </td>
                                                     <td>
                                                         <Button variant='warning' onClick={() => openUpdateModal(mhs)}>Update</Button>
@@ -272,7 +332,6 @@ function PerwalianDosen() {
                                                     <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
-                                            &nbsp; Mahasiswa per Halaman
                                         </div>
                                         <Pagination>
                                             {Array.from({ length: Math.ceil(filteredMahasiswa.length / mahasiswaPerPage) }, (_, i) => (
@@ -305,31 +364,69 @@ function PerwalianDosen() {
                                         <thead text-align=''>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
                                                 <th>NIM</th>
+                                                <th>Nama</th>
                                                 <th>Semester</th>
-                                                <th>Alamat</th>
-                                                <th>Nomor HP</th>
                                                 <th>Peringatan</th>
+                                                <th>Nomor HP</th>
                                                 <th>Detail</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th>
+                                                    <FormControl
+                                                        type="text"
+                                                        placeholder="Filter NIM"
+                                                        className="me-2"
+                                                        value={nimFilter}
+                                                        onChange={(e) => setNimFilter(e.target.value)}
+                                                    />
+                                                </th>
+                                                <th>
+                                                    <FormControl
+                                                        type="text"
+                                                        placeholder="Filter Nama"
+                                                        className="me-2"
+                                                        value={nameFilter}
+                                                        onChange={(e) => setNameFilter(e.target.value)}
+                                                    />
+                                                </th>
+                                                <th>
+                                                    <FormControl
+                                                        type="text"
+                                                        placeholder="Filter Semester"
+                                                        className="me-2"
+                                                        value={semesterFilter}
+                                                        onChange={(e) => setSemesterFilter(e.target.value)}
+                                                    />
+                                                </th>
+                                                <th>
+                                                    <DropdownButton title={alertFilter === 'semua' ? 'semua' : alertFilter} onSelect={setAlertFilter}>
+                                                        <Dropdown.Item eventKey="semua">Semua</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="aman"><RiAlarmWarningFill color="green" /> Aman </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="kendala"><RiAlarmWarningFill color="orange" /> Terkendala </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="tidak aman"><RiAlarmWarningFill color="red" /> Tidak Aman </Dropdown.Item>
+                                                    </DropdownButton>
+                                                </th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {currentMahasiswa.map((mhs, index) => (
                                                 <tr key={mhs.id}>
                                                     <td>{indexOfFirstMahasiswa + index + 1}</td>
-                                                    <td>{mhs.name}</td>
                                                     <td>{mhs.nim}</td>
+                                                    <td>{mhs.name}</td>
                                                     <td>{mhs.semester}</td>
-                                                    <td>{mhs.address}</td>
+                                                    <td>
+                                                        {mhs.alert === 'aman' && <RiAlarmWarningFill color="green" />}
+                                                        {mhs.alert === 'kendala' && <RiAlarmWarningFill color="orange" />}
+                                                        {mhs.alert === 'tidak aman' && <RiAlarmWarningFill color="red" />}
+                                                    </td>
                                                     <td>{mhs.phone}</td>
                                                     <td>
-                                                        {mhs.status === 'aman' && <RiAlarmWarningFill color="green" />}
-                                                        {mhs.status === 'kendala' && <RiAlarmWarningFill color="orange" />}
-                                                        {mhs.status === 'tidak aman' && <RiAlarmWarningFill color="red" />}
-                                                    </td>
-                                                    <td>
-                                                        <Button variant='danger'><BsFiletypePdf /> Download PDF/Print</Button>
+                                                        <Button variant='danger' className='small-pdf'><BsFiletypePdf /> Download PDF/Print</Button>
                                                     </td>
                                                 </tr>
                                             ))}
@@ -475,7 +572,7 @@ function PerwalianDosen() {
                                     className="modal-info-value"
                                     value={recommendation}
                                     onChange={handleRecommendationChange}
-                                    rows="4" 
+                                    rows="4"
                                     style={{ width: '100%' }}
                                 />
                             </div>
