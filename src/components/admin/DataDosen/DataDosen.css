@@ -17,3 +17,16 @@
 .table td, .table th {
     text-align: center;
 }
+
+.small-btn-tambah-dosen {
+    padding: 0.5rem 0.5rem; /* Adjust padding as needed */
+    font-size: 0.8rem;      /* Adjust font size as needed */
+}
+
+.form-grup{
+    margin-bottom: 0.7rem;
+}
+
+.label{
+    margin-bottom: .3rem;
+}

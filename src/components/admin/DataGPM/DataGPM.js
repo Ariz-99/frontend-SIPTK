@@ -1,4 +1,4 @@
-import React, {useState, useEffect}from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Button, Form, FormControl, Table, Modal } from 'react-bootstrap';
 import { BsFolderSymlinkFill } from "react-icons/bs";
 import './DataGPM.css'
@@ -8,6 +8,7 @@ function DataDosen() {
     const [filteredGpm, setFilteredGpm] = useState([]);
     const [selectedGpm, setSelectedGpm] = useState({});
     const [showModal, setShowModal] = useState(false);
+    const [showTambahGpm, setShowTambahGpm] = useState(false);
     const [password, setPassword] = useState(selectedGpm.pass);
     const [showPassword, setShowPassword] = useState(false);
 
@@ -20,9 +21,9 @@ function DataDosen() {
 
 
     const Gpm = [
-        { id: 1, name: 'Ariz Muhammad Fajar', nip: '2222222222',  address: 'Padang, Indonesia', phone: '081234567890', status: 'Dosen & GPM' },
-        { id: 2, name: 'Fitra', nip: '3333333333',  address: 'Jakarta, Indonesia', phone: '081234567890', status: 'Dosen' },
-        { id: 3, name: 'Marul', nip: '444444444',  address: 'Pati, Indonesia', phone: '081234567890', status: 'Dosen' }
+        { id: 1, name: 'Ariz Muhammad Fajar', nip: '2222222222', address: 'Padang, Indonesia', phone: '081234567890', status: 'Dosen & GPM' },
+        { id: 2, name: 'Fitra', nip: '3333333333', address: 'Jakarta, Indonesia', phone: '081234567890', status: 'Dosen' },
+        { id: 3, name: 'Marul', nip: '444444444', address: 'Pati, Indonesia', phone: '081234567890', status: 'Dosen' }
     ];
 
     const openModal = (Gpm) => {
@@ -32,6 +33,14 @@ function DataDosen() {
 
     const closeModal = () => {
         setShowModal(false);
+    };
+
+    const openTambahGpm = () => {
+        setShowTambahGpm(true);
+    }
+
+    const closeTambahGpm = () => {
+        setShowTambahGpm(false);
     };
 
     const toggleShowPassword = () => {
@@ -64,7 +73,7 @@ function DataDosen() {
                                 </Form>
                             </div>
                             <Table responsive="sm" striped bordered hover>
-                                <thead text-align= ''>
+                                <thead text-align=''>
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
@@ -89,7 +98,7 @@ function DataDosen() {
                                                 <BsFolderSymlinkFill style={{ cursor: 'pointer' }} onClick={() => openModal(Gpm)} />
                                             </td>
                                             <td>
-                                                <div className='d-flex' style={{ justifyContent:'center'}}>
+                                                <div className='d-flex' style={{ justifyContent: 'center' }}>
                                                     <Button
                                                         className='small-btn'
                                                         variant="danger"
@@ -105,6 +114,15 @@ function DataDosen() {
                             </Table>
                         </Card.Body>
                     </Card>
+                    <div className='d-flex'>
+                        <Button
+                            className='small-btn-tambah-dosen'
+                            style={{ backgroundColor: '#DE9560', borderColor: '#DE9560', marginTop: '10px' }}
+                            onClick={() => openTambahGpm()}
+                        >
+                            Tambah Dosen
+                        </Button>
+                    </div>
                 </div>
             </div>
             <Modal show={showModal} onHide={closeModal}>
@@ -162,6 +180,42 @@ function DataDosen() {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={closeModal}>Save</Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showTambahGpm} onHide={closeTambahGpm}>
+                <Modal.Header style={{ backgroundColor: '#4E52BE' }}>
+                    <Modal.Title style={{ color: 'white' }}>Tambah Data GPM</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >Nama</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >NIP</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >Alamat</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >Nomor HP</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >Prodi</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >Fakultas</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary">Submit</Button>
                 </Modal.Footer>
             </Modal>
         </div>

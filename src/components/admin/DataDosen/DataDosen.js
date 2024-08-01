@@ -1,5 +1,5 @@
-import React, {useState, useEffect}from 'react';
-import { Card, Button, FormControl, Table, Modal } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Card, Button, FormControl, Table, Modal, Form } from 'react-bootstrap';
 import { BsFolderSymlinkFill, BsPersonCircle } from "react-icons/bs";
 import './DataDosen.css'
 
@@ -10,6 +10,7 @@ function DataDosen() {
     const [nipFilter, setNipFilter] = useState('');
     const [nameFilter, setNameFilter] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [showTambahDosen, setShowTambahDosen] = useState(false);
     const [password, setPassword] = useState(selectedDosen.pass);
     const [showPassword, setShowPassword] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -23,11 +24,11 @@ function DataDosen() {
         setFilteredDosen(results);
     }, [nipFilter, nameFilter]);
 
-  
+
     const Dosen = [
-        { id: 1, name: 'Ariz Muhammad Fajar', nip: '2222222222',  address: 'Padang, Indonesia', phone: '081234567890', status: 'Dosen & GPM' },
-        { id: 2, name: 'Fitra', nip: '3333333333',  address: 'Jakarta, Indonesia', phone: '081234567890', status: 'Dosen' },
-        { id: 3, name: 'Marul', nip: '444444444',  address: 'Pati, Indonesia', phone: '081234567890', status: 'Dosen' }
+        { id: 1, name: 'Ariz Muhammad Fajar', nip: '2222222222', address: 'Padang, Indonesia', phone: '081234567890', status: 'Dosen & GPM' },
+        { id: 2, name: 'Fitra', nip: '3333333333', address: 'Jakarta, Indonesia', phone: '081234567890', status: 'Dosen' },
+        { id: 3, name: 'Marul', nip: '444444444', address: 'Pati, Indonesia', phone: '081234567890', status: 'Dosen' }
     ];
 
     const openModal = (Dosen) => {
@@ -37,6 +38,14 @@ function DataDosen() {
 
     const closeModal = () => {
         setShowModal(false);
+    };
+
+    const openTambahDosen = (Dosen) => {
+        setShowTambahDosen(true);
+    }
+
+    const closeTambahDosen = () => {
+        setShowTambahDosen(false);
     };
 
     const toggleShowPassword = () => {
@@ -57,7 +66,7 @@ function DataDosen() {
                         </Card.Header>
                         <Card.Body>
                             <Table responsive="sm" striped bordered hover>
-                                <thead text-align= ''>
+                                <thead text-align=''>
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
@@ -92,7 +101,15 @@ function DataDosen() {
                                         <th></th>
                                         <th></th>
                                         <th></th>
-                                        <th></th>
+                                        <th>
+                                            <Button
+                                                className='small-btn-tambah-dosen'
+                                                style={{ backgroundColor: '#DE9560', borderColor: '#DE9560' }}
+                                                onClick={() => openTambahDosen(Dosen)}
+                                            >
+                                                Tambah Dosen
+                                            </Button>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -108,7 +125,7 @@ function DataDosen() {
                                                 <BsFolderSymlinkFill style={{ cursor: 'pointer' }} onClick={() => openModal(Dosen)} />
                                             </td>
                                             <td>
-                                                <div className='d-flex' style={{ justifyContent:'center'}}>
+                                                <div className='d-flex' style={{ justifyContent: 'center' }}>
                                                     <Button
                                                         className='small-btn'
                                                         variant="danger"
@@ -180,7 +197,43 @@ function DataDosen() {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={closeModal}>Save</Button>
+                    <Button variant="primary" >Save</Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showTambahDosen} onHide={closeTambahDosen}>
+                <Modal.Header style={{ backgroundColor: '#4E52BE' }}>
+                    <Modal.Title style={{ color: 'white' }}>Tambah Data Dosen</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >Nama</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >NIP</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >Alamat</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >Nomor HP</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >Prodi</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                        <Form.Group  style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label >Fakultas</Form.Label>
+                            <Form.Control type="name" />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary">Submit</Button>
                 </Modal.Footer>
             </Modal>
         </div>
