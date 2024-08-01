@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, FormControl, Table, Dropdown, DropdownButton, Pagination, Modal, Button } from 'react-bootstrap';
-import { BsFolderSymlinkFill } from "react-icons/bs";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsFolderSymlinkFill, BsPersonCircle } from "react-icons/bs";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import './DataMahasiswa.css';
 
@@ -14,9 +13,12 @@ function DataMahasiswa() {
     const [statusFilter, setStatusFilter] = useState('semua');
     const [filteredMahasiswa, setFilteredMahasiswa] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showPengampu, setShowPengampu] = useState(false);
     const [selectedMahasiswa, setSelectedMahasiswa] = useState({});
-    const [password, setPassword] = useState(selectedMahasiswa.pass);
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedPengampu, setSelectedPengampu] = useState('');
 
     useEffect(() => {
         const results = Mahasiswa.filter(mhs =>
@@ -100,6 +102,7 @@ function DataMahasiswa() {
 
     const openModal = (mhs) => {
         setSelectedMahasiswa(mhs);
+        setPassword(mhs.pass);
         setShowModal(true);
     };
 
@@ -107,17 +110,28 @@ function DataMahasiswa() {
         setShowModal(false);
     };
 
+    const openPengampu = (mhs) => {
+        setSelectedMahasiswa(mhs);
+        setShowPengampu(true);
+    }
+
+    const closePengampu = () => {
+        setShowPengampu(false);
+    }
+
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
-    };
-
-    const handleTambahPengampu = (mhs) => {
-        console.log(`Tambah Pengampu untuk mahasiswa dengan NIM: ${mhs.nim}`);
     };
 
     const handleHapusMahasiswa = (mhs) => {
         console.log(`Hapus Mahasiswa dengan NIM: ${mhs.nim}`);
     };
+
+    const pengampuList = ['budi', 'fitra', 'anton', 'Andi', 'teguh', 'budi', 'fitra', 'anton', 'Andi', 'teguh','budi', 'fitra', 'anton', 'Andi', 'teguh','budi', 'fitra', 'anton', 'Andi', 'teguh']; // Replace with your actual list of Pengampu
+
+    const filteredPengampu = pengampuList.filter(pengampu =>
+        pengampu.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div>
@@ -128,101 +142,103 @@ function DataMahasiswa() {
                             <h3>Data Mahasiswa</h3>
                         </Card.Header>
                         <Card.Body>
-                            <Table responsive="sm" striped bordered hover>
-                                <thead text-align=''>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>NIM</th>
-                                        <th>Nama</th>
-                                        <th>Semester</th>
-                                        <th>Alamat</th>
-                                        <th>Nomor HP</th>
-                                        <th>Peringatan</th>
-                                        <th>Detail</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                    <tr>
-                                        <th></th>
-                                        <th>
-                                            <FormControl
-                                                type="text"
-                                                placeholder="Filter NIM"
-                                                className="me-2"
-                                                value={nimFilter}
-                                                onChange={(e) => setNimFilter(e.target.value)}
-                                            />
-                                        </th>
-                                        <th>
-                                            <FormControl
-                                                type="text"
-                                                placeholder="Filter Nama"
-                                                className="me-2"
-                                                value={nameFilter}
-                                                onChange={(e) => setNameFilter(e.target.value)}
-                                            />
-                                        </th>
-                                        <th>
-                                            <FormControl
-                                                type="number"
-                                                placeholder="Filter Semester"
-                                                className="me-2"
-                                                value={semesterFilter}
-                                                onChange={(e) => setSemesterFilter(e.target.value)}
-                                            />
-                                        </th>
-                                        <th></th>
-                                        <th></th>
-                                        <th>
-                                            <DropdownButton title={statusFilter === 'semua' ? 'Filter Status' : statusFilter} onSelect={setStatusFilter}>
-                                                <Dropdown.Item eventKey="semua">Semua</Dropdown.Item>
-                                                <Dropdown.Item eventKey="aman"><RiAlarmWarningFill color="green" /> Aman </Dropdown.Item>
-                                                <Dropdown.Item eventKey="kendala"><RiAlarmWarningFill color="orange" /> Terkendala </Dropdown.Item>
-                                                <Dropdown.Item eventKey="tidak aman"><RiAlarmWarningFill color="red" /> Tidak Aman </Dropdown.Item>
-                                            </DropdownButton>
-                                        </th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {currentMahasiswa.map((mhs, index) => (
-                                        <tr key={mhs.id}>
-                                            <td>{index + 1}</td>
-                                            <td className="table-cell-ellipsis">{mhs.nim}</td>
-                                            <td className="table-cell-ellipsis">{mhs.name}</td>
-                                            <td className="table-cell-ellipsis">{mhs.semester}</td>
-                                            <td className="table-cell-ellipsis">{mhs.address}</td>
-                                            <td className="table-cell-ellipsis">{mhs.phone}</td>
-                                            <td>
-                                                {mhs.status === 'aman' && <RiAlarmWarningFill color="green" />}
-                                                {mhs.status === 'kendala' && <RiAlarmWarningFill color="orange" />}
-                                                {mhs.status === 'tidak aman' && <RiAlarmWarningFill color="red" />}
-                                            </td>
-                                            <td>
-                                                <BsFolderSymlinkFill style={{ cursor: 'pointer' }} onClick={() => openModal(mhs)} />
-                                            </td>
-                                            <td>
-                                                <div className='d-flex'>
-                                                    <Button
-                                                        className='small-btn'
-                                                        style={{ backgroundColor: '#DE9560', borderColor: '#DE9560' }}
-                                                        onClick={() => handleTambahPengampu(mhs)}
-                                                    >
-                                                        Tambah Pengampu
-                                                    </Button>
-                                                    <Button
-                                                        className='small-btn'
-                                                        variant="danger"
-                                                        onClick={() => handleHapusMahasiswa(mhs)}
-                                                    >
-                                                        Hapus Mahasiswa
-                                                    </Button>
-                                                </div>
-                                            </td>
+                            <div style={{ overflowX: 'auto' }}>
+                                <Table responsive="sm" striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>NIM</th>
+                                            <th>Nama</th>
+                                            <th>Semester</th>
+                                            <th>Alamat</th>
+                                            <th>Nomor HP</th>
+                                            <th>Peringatan</th>
+                                            <th>Detail</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
+                                        <tr>
+                                            <th></th>
+                                            <th>
+                                                <FormControl
+                                                    type="text"
+                                                    placeholder="Filter NIM"
+                                                    className="me-2"
+                                                    value={nimFilter}
+                                                    onChange={(e) => setNimFilter(e.target.value)}
+                                                />
+                                            </th>
+                                            <th>
+                                                <FormControl
+                                                    type="text"
+                                                    placeholder="Filter Nama"
+                                                    className="me-2"
+                                                    value={nameFilter}
+                                                    onChange={(e) => setNameFilter(e.target.value)}
+                                                />
+                                            </th>
+                                            <th>
+                                                <FormControl
+                                                    type="text"
+                                                    placeholder="Filter Semester"
+                                                    className="me-2"
+                                                    value={semesterFilter}
+                                                    onChange={(e) => setSemesterFilter(e.target.value)}
+                                                />
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                            <th>
+                                                <DropdownButton title={statusFilter === 'semua' ? 'Filter Status' : statusFilter} onSelect={setStatusFilter}>
+                                                    <Dropdown.Item eventKey="semua">Semua</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="aman"><RiAlarmWarningFill color="green" /> Aman </Dropdown.Item>
+                                                    <Dropdown.Item eventKey="kendala"><RiAlarmWarningFill color="orange" /> Terkendala </Dropdown.Item>
+                                                    <Dropdown.Item eventKey="tidak aman"><RiAlarmWarningFill color="red" /> Tidak Aman </Dropdown.Item>
+                                                </DropdownButton>
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {currentMahasiswa.map((mhs, index) => (
+                                            <tr key={mhs.id}>
+                                                <td>{index + 1}</td>
+                                                <td className="table-cell-ellipsis">{mhs.nim}</td>
+                                                <td className="table-cell-ellipsis">{mhs.name}</td>
+                                                <td className="table-cell-ellipsis">{mhs.semester}</td>
+                                                <td className="table-cell-ellipsis">{mhs.address}</td>
+                                                <td className="table-cell-ellipsis">{mhs.phone}</td>
+                                                <td>
+                                                    {mhs.status === 'aman' && <RiAlarmWarningFill color="green" />}
+                                                    {mhs.status === 'kendala' && <RiAlarmWarningFill color="orange" />}
+                                                    {mhs.status === 'tidak aman' && <RiAlarmWarningFill color="red" />}
+                                                </td>
+                                                <td>
+                                                    <BsFolderSymlinkFill style={{ cursor: 'pointer' }} onClick={() => openModal(mhs)} />
+                                                </td>
+                                                <td>
+                                                    <div className='d-flex'>
+                                                        <Button
+                                                            className='small-btn'
+                                                            style={{ backgroundColor: '#DE9560', borderColor: '#DE9560' }}
+                                                            onClick={() => openPengampu(mhs)}
+                                                        >
+                                                            Tambah Pengampu
+                                                        </Button>
+                                                        <Button
+                                                            className='small-btn'
+                                                            variant="danger"
+                                                            onClick={() => handleHapusMahasiswa(mhs)}
+                                                        >
+                                                            Hapus Mahasiswa
+                                                        </Button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </div>
                             <div className="d-flex justify-content-between">
                                 <div>
                                     <Dropdown>
@@ -319,6 +335,41 @@ function DataMahasiswa() {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={closeModal}>Save</Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showPengampu} onHide={closePengampu}>
+                <Modal.Header style={{ backgroundColor: '#4E52BE' }}>
+                    <Modal.Title style={{ color: 'white' }}>Pilih Pengampu</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="modal-body-container">
+                        <Dropdown className="w-100">
+                            <Dropdown.Toggle variant="secondary" className="w-100 dropdown-custom-toggle">
+                                <span className="dropdown-text">{selectedPengampu || 'Pilih Dosen'}</span>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu className="w-100 dropdown-menu-custom">
+                                <div className="dropdown-search">
+                                    <FormControl
+                                        type="text"
+                                        placeholder="Search..."
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                        value={searchTerm}
+                                    />
+                                </div>
+                                {filteredPengampu.map((pengampu, index) => (
+                                    <Dropdown.Item
+                                        key={index}
+                                        onClick={() => setSelectedPengampu(pengampu)}
+                                    >
+                                        {pengampu}
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={closePengampu}>Submit</Button>
                 </Modal.Footer>
             </Modal>
         </div>

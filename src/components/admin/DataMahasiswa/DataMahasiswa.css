@@ -95,3 +95,29 @@
     margin-left: 5px;
     cursor: pointer;
 }
+
+.dropdown-custom-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.dropdown-custom-toggle .dropdown-text {
+    flex: 1;
+    text-align: left;
+    padding-right: 10px;
+}
+
+.dropdown-menu-custom {
+    max-height: 200px; /* Sesuaikan dengan kebutuhan */
+    overflow-y: auto;
+}
+
+.dropdown-search {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff; /* Sesuaikan warna latar belakang jika perlu */
+    z-index: 1; /* Pastikan search bar berada di atas item dropdown */
+    padding: 5px; /* Tambahkan padding jika diperlukan */
+}

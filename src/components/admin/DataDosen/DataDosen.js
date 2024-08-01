@@ -1,7 +1,6 @@
 import React, {useState, useEffect}from 'react';
 import { Card, Button, FormControl, Table, Modal } from 'react-bootstrap';
 import { BsFolderSymlinkFill, BsPersonCircle } from "react-icons/bs";
-import { RiAlarmWarningFill } from "react-icons/ri";
 import './DataDosen.css'
 
 function DataDosen() {
