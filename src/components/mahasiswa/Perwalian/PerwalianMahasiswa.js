@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Table, Tab, Tabs, Modal } from 'react-bootstrap';
-import { BsPerson, BsFolderSymlinkFill } from "react-icons/bs";
+import { BsPerson, BsFolderSymlinkFill, BsPersonCircle } from "react-icons/bs";
 import './PerwalianMahasiswa.css';
 
 function PerwalianMahasiswa() {
@@ -60,7 +60,7 @@ function PerwalianMahasiswa() {
         nomorHp: "08123456789",
         uraian: "Awal Semester",
         masalahAkademik: "test",
-        rekomendasi:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ac nisl varius, vulputate nisi id,tempus urna. Fusce sollicitudin, metus sit amet egestas imperdiet, erat nulla viverra enim, non accumsan turpis neque quis sapien."
+        rekomendasi: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ac nisl varius, vulputate nisi id,tempus urna. Fusce sollicitudin, metus sit amet egestas imperdiet, erat nulla viverra enim, non accumsan turpis neque quis sapien."
     };
 
     const handleIconClick = (data) => {
@@ -288,20 +288,53 @@ function PerwalianMahasiswa() {
                 </Modal.Header>
                 <Modal.Body>
                     {selectedData && (
-                        <div>
-                            <p>Nama: {selectedData.nama}</p>
-                            <p>NIM: {selectedData.nim}</p>
-                            <p>Dosen Wali: {selectedData.dosenWali}</p>
-                            <p>Nama Ortu: {selectedData.namaOrtu}</p>
-                            <p>Alamat: {selectedData.alamat}</p>
-                            <p>Tahun Akademik: {selectedData.tahunAkademik}</p>
-                            <p>Tanggal Perwalian: {selectedData.tanggalPerwalian}</p>
-                            <p>IPK: {selectedData.ipk}</p>
-                            <p>Jumlah SKS: {selectedData.jumlahSks}</p>
-                            <p>Nomor HP: {selectedData.nomorHp}</p>
-                            <p>Uraian: {selectedData.uraian}</p>
-                            <p>Masalah Akademik: {selectedData.masalahAkademik}</p>
-                            <p>Rekomendasi: {selectedData.rekomendasi}</p>
+                        <div className="perwalian-modal-body-container">
+                            <div className="perwalian-modal-info">
+                                <div className="perwalian-modal-info-row">
+                                    <span className="perwalian-modal-info-label">Nama</span>
+                                    <span className="perwalian-modal-info-value">: {selectedData.nama}</span>
+                                </div>
+                                <div className="perwalian-modal-info-row">
+                                    <span className="perwalian-modal-info-label">NIM</span>
+                                    <span className="perwalian-modal-info-value">: {selectedData.nim}</span>
+                                </div>
+                                <div className="perwalian-modal-info-row">
+                                    <span className="perwalian-modal-info-label">Dosen Wali</span>
+                                    <span className="perwalian-modal-info-value">: {selectedData.dosenWali}</span>
+                                </div>
+                                <div className="perwalian-modal-info-row">
+                                    <span className="perwalian-modal-info-label">Tahun Akademik</span>
+                                    <span className="perwalian-modal-info-value">: {selectedData.tahunAkademik}</span>
+                                </div>
+                                <div className="perwalian-modal-info-row">
+                                    <span className="perwalian-modal-info-label">Tanggal Perwalian</span>
+                                    <span className="perwalian-modal-info-value">: {selectedData.tanggalPerwalian}</span>
+                                </div>
+                                <div className="perwalian-modal-info-row">
+                                    <span className="perwalian-modal-info-label">IPK</span>
+                                    <span className="perwalian-modal-info-value">: {selectedData.ipk}</span>
+                                </div>
+                                <div className="perwalian-modal-info-row">
+                                    <span className="perwalian-modal-info-label">Jumlah SKS</span>
+                                    <span className="perwalian-modal-info-value">: {selectedData.jumlahSks}</span>
+                                </div>
+                                <div className="perwalian-modal-info-row">
+                                    <span className="perwalian-modal-info-label">Nomor HP</span>
+                                    <span className="perwalian-modal-info-value">: {selectedData.nomorHp}</span>
+                                </div>
+                                <div className="perwalian-modal-info-row">
+                                    <span className="perwalian-modal-info-label">Uraian</span>
+                                    <span className="perwalian-modal-info-value">: {selectedData.uraian}</span>
+                                </div>
+                                <div className="perwalian-modal-info-row">
+                                    <span className="perwalian-modal-info-label">Masalah Akademik</span>
+                                    <span className="perwalian-modal-info-value">: {selectedData.masalahAkademik}</span>
+                                </div>
+                                <div className="perwalian-modal-info-row">
+                                    <span className="perwalian-modal-info-label">Rekomendasi</span>
+                                    <span className="perwalian-modal-info-value">: {selectedData.rekomendasi}</span>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </Modal.Body>

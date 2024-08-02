@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Tab, Tabs, Container, Row, Col, Card, Button, Form, FormControl, Table, Pagination, Dropdown, DropdownButton, Modal } from 'react-bootstrap';
-import { BsFiletypePdf, BsCheckCircle, BsFolderSymlinkFill } from "react-icons/bs";
+import { BsFiletypePdf, BsFolderSymlinkFill, BsPersonCircle } from "react-icons/bs";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
@@ -465,10 +465,10 @@ function PerwalianDosen() {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="modal-body-container">
-                        <img
-                            src={selectedMahasiswa.profilePicture}
-                            alt="Profile"
-                            className="modal-profile-picture"
+                        <BsPersonCircle
+                            className="modal-profile-icon"
+                            size={70} // Sesuaikan ukuran ikon
+                            color="#555" // Sesuaikan warna ikon
                         />
                         <div className="modal-info">
                             <div className="modal-info-row">
@@ -524,10 +524,10 @@ function PerwalianDosen() {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="modal-body-container">
-                        <img
-                            src={selectedMahasiswa.profilePicture}
-                            alt="Profile"
-                            className="modal-profile-picture"
+                        <BsPersonCircle
+                            className="modal-profile-icon"
+                            size={70} // Sesuaikan ukuran ikon
+                            color="#555" // Sesuaikan warna ikon
                         />
                         <div className="modal-info">
                             <div className="modal-info-row">

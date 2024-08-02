@@ -40,4 +40,34 @@
     justify-content: space-evenly;
 }
 
+.perwalian-modal-body-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.perwalian-modal-profile-icon {
+    margin-right: 20px;
+}
+
+.perwalian-modal-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.perwalian-modal-info-row {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.perwalian-modal-info-label {
+    width: 150px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.perwalian-modal-info-value {
+    flex: 1;
+    text-align: left;
+}
 
