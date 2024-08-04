@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { BsPersonCircle } from "react-icons/bs";
 import { IoIosSave } from "react-icons/io";
@@ -7,12 +7,8 @@ import './ProfileDosen.css'
 
 
 function ProfileDosen() {
-    // Di sini Anda dapat melakukan logika untuk mengambil detail mahasiswa berdasarkan ID dari backend atau dari data yang sudah Anda miliki
-
-    // Contoh penggunaan:
-    // const detailMahasiswa = fetchDataMahasiswaById(mahasiswaId);
-
-    // Kemudian tampilkan detail mahasiswa di dalam komponen ini
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
 
@@ -21,14 +17,18 @@ function ProfileDosen() {
         navigate('/dosen'); // Mengarahkan ke path '/dosen/perwalian'
     };
 
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div className="detail-container">
-            <div className="btn-back">
-                <Button variant="primary" onClick={handleBack}  >Back</Button>
+            <div className="btn-kembali">
+                <Button variant="primary" onClick={handleBack} className="back-button">Kembali</Button>
             </div>
-            <div className="prwln-box">
+            <div className="profile-box">
                 <div className="icon-text-container-center">
-                    <h5>Profile</h5>
+                    <h5>Profile Dosen</h5>
                 </div>
                 <hr />
                 <div className='icon-form-container'>
@@ -61,11 +61,25 @@ function ProfileDosen() {
                                 <Form.Label>Fakultas :</Form.Label>
                                 <Form.Control type="name" />
                             </Form.Group>
+                            <Form.Group className="mb-3" style={{textAlign: 'left'}}>
+                                <Form.Label>Password :</Form.Label>
+                                <div className="password-container">
+                                    <Form.Control
+                                        type={showPassword ? "text" : "password"}
+                                        className="password-input"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                    <span className="eye-icon" onClick={toggleShowPassword}>
+                                        {showPassword ? '👁️' : '👁️‍🗨️'}
+                                    </span>
+                                </div>
+                            </Form.Group>
                         </Form>
                     </div>
                 </div>
                 <div className='btn-submit'>
-                        <Button variant="primary" type="submit"><IoIosSave size={20} /> Save</Button>
+                    <Button variant="primary" type="submit"><IoIosSave size={20} /> Save</Button>
                 </div>
             </div>
         </div>

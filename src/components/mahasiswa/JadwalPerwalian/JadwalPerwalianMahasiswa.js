@@ -108,14 +108,8 @@ function JadwalPerwalianMahasiswa() {
                                 </Form.Select>
                             </div>
                         </div>
-                        <hr />
-                        <div className='btn-pdf'>
-                            <Button variant="danger"><BsFiletypePdf size={20} /> Download PDF/Print</Button>
-                        </div>
                     </div>
                     <div>
-                        <hr className='hr-style' />
-                        <h2 style={{ color: 'red' }}>Nama Dosen - NIP</h2>
                         <hr className='hr-style' />
                     </div>
                     <div>

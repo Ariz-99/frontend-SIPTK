@@ -1,0 +1,62 @@
+.detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.icon-form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.icon-form-container .icon {
+    margin-right: 45px;
+}
+
+.form-container {
+    flex-grow: 1; /* Mengatur form untuk mengisi sisa ruang secara dinamis */
+}
+
+.btn-kembali {
+    margin-bottom: 20px;
+    align-self: flex-start; 
+}
+
+.profile-box {
+    width: 95%;
+    background-color: #F9F9F9; 
+    border-color: black;
+    border-style: solid;
+    border-width: 2px; 
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); 
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.back-button {
+    background-color: #4E52BE;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 16px;
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+}
+
+.password-input {
+    flex-grow: 1;
+}
+
+.eye-icon {
+    cursor: pointer;
+    margin-left: 10px;
+}

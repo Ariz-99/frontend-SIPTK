@@ -7,6 +7,7 @@ function PerwalianMahasiswa() {
     const [nama, setNama] = useState('');
     const [nim, setNim] = useState('');
     const [dosenWali, setDosenWali] = useState('');
+    const [DosenPembimbinng, setDosenPembimbinng] = useState('');
     const [namaOrtu, setNamaOrtu] = useState('');
     const [alamat, setAlamat] = useState('');
     const [tahunAkademik, setTahunAkademik] = useState('');
@@ -24,6 +25,7 @@ function PerwalianMahasiswa() {
         setNama('');
         setNim('');
         setDosenWali('');
+        setDosenPembimbinng('');
         setNamaOrtu('');
         setAlamat('');
         setTahunAkademik('');
@@ -40,11 +42,11 @@ function PerwalianMahasiswa() {
     };
 
     const Mahasiswa = [
-        { id: 1, date: 'senin, 29 april 2024 ', semester: 8, clock: '09:00-11:00', hasil: 'Approved' },
-        { id: 2, date: 'jumat, 3 mei 2024 ', semester: 8, clock: '08:00-10:00', hasil: 'Approved' },
-        { id: 3, date: 'selasa, 14 mei 2024 ', semester: 8, clock: '13:00-14:00', hasil: 'Rejected' },
-        { id: 4, date: 'rabu, 5 juni 2024 ', semester: 8, clock: '08:00-09:00', hasil: 'Approved' },
-        { id: 5, date: 'senin, 10 juni 2024 ', semester: 8, clock: '10:00-11:00', hasil: 'Rejected' },
+        { id: 1, date: 'senin, 29 april 2024 ', dosen: 'dr. budi', semester: 8, nohpdosen: '08987654321', clock: '09:00-11:00', hasil: 'Approved' },
+        { id: 2, date: 'jumat, 3 mei 2024 ', dosen: 'dr. fitri', semester: 8, nohpdosen: '0812345678', clock: '08:00-10:00', hasil: 'Approved' },
+        { id: 3, date: 'selasa, 14 mei 2024 ', dosen: 'dr. ahmad', semester: 8, nohpdosen: '0865839274', clock: '13:00-14:00', hasil: 'Rejected' },
+        { id: 4, date: 'rabu, 5 juni 2024 ', dosen: 'dr. andi', semester: 8, nohpdosen: '087596932354', clock: '08:00-09:00', hasil: 'Approved' },
+        { id: 5, date: 'senin, 10 juni 2024 ', dosen: 'dr. stug', semester: 8, nohpdosen: '08128965743', clock: '10:00-11:00', hasil: 'Rejected' },
     ];
 
     const dummyData = {
@@ -112,6 +114,14 @@ function PerwalianMahasiswa() {
                                     type="text"
                                     value={dosenWali}
                                     onChange={(e) => setDosenWali(e.target.value)}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="formDosenWali" style={{ textAlign: 'left', marginTop: '10px' }}>
+                                <Form.Label>Dosen Pembimbing:</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={dosenWali}
+                                    onChange={(e) => setDosenPembimbinng(e.target.value)}
                                 />
                             </Form.Group>
                             <Form.Group controlId="formNamaOrtu" style={{ textAlign: 'left', marginTop: '10px' }}>
@@ -228,7 +238,9 @@ function PerwalianMahasiswa() {
                                 <tr>
                                     <th>No</th>
                                     <th>Tanggal</th>
+                                    <th>Dosen</th>
                                     <th>Semester</th>
+                                    <th>Nomor HP Dosen</th>
                                     <th>Waktu</th>
                                     <th>Hasil</th>
                                 </tr>
@@ -238,7 +250,9 @@ function PerwalianMahasiswa() {
                                     <tr key={index}>
                                         <td>{mhs.id}</td>
                                         <td>{mhs.date}</td>
+                                        <td>{mhs.dosen}</td>
                                         <td>{mhs.semester}</td>
+                                        <td>{mhs.nohpdosen}</td>
                                         <td>{mhs.clock}</td>
                                         <td style={{ color: mhs.hasil === 'Approved' ? 'green' : 'red' }}>
                                             {mhs.hasil}
