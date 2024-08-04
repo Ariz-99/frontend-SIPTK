@@ -103,6 +103,10 @@
     width: 100%;
 }
 
+.dropdown-custom-toggle::after {
+    color: black;
+}
+
 .dropdown-custom-toggle .dropdown-text {
     flex: 1;
     text-align: left;

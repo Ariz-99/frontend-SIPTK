@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Table, Tab, Tabs, Modal } from 'react-bootstrap';
+import { Form, Button, Table, Tab, Tabs, Modal, Dropdown, FormControl } from 'react-bootstrap';
 import { BsPerson, BsFolderSymlinkFill, BsPersonCircle } from "react-icons/bs";
 import './PerwalianMahasiswa.css';
 
@@ -20,6 +20,9 @@ function PerwalianMahasiswa() {
 
     const [showModal, setShowModal] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedDosen, setSelectedDosen] = useState('');
 
     const handleReset = () => {
         setNama('');
@@ -75,6 +78,12 @@ function PerwalianMahasiswa() {
         setSelectedData(null);
     };
 
+    const dosenList = ['budi', 'fitra', 'anton', 'Andi', 'teguh', 'budi', 'fitra', 'anton', 'Andi', 'teguh','budi', 'fitra', 'anton', 'Andi', 'teguh','budi', 'fitra', 'anton', 'Andi', 'teguh']; // Replace with your actual list of Pengampu
+
+    const filteredDosen = dosenList.filter(dosen =>
+        dosen.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div className="prwln-container">
             <div className="prwln-box">
@@ -109,21 +118,41 @@ function PerwalianMahasiswa() {
                                 />
                             </Form.Group>
                             <Form.Group controlId="formDosenWali" style={{ textAlign: 'left', marginTop: '10px' }}>
-                                <Form.Label>Dosen Wali:</Form.Label>
+                                <Form.Label>Dosen Wali  :</Form.Label>
                                 <Form.Control
                                     type="text"
                                     value={dosenWali}
                                     onChange={(e) => setDosenWali(e.target.value)}
                                 />
                             </Form.Group>
-                            <Form.Group controlId="formDosenWali" style={{ textAlign: 'left', marginTop: '10px' }}>
-                                <Form.Label>Dosen Pembimbing:</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    value={dosenWali}
-                                    onChange={(e) => setDosenPembimbinng(e.target.value)}
-                                />
-                            </Form.Group>
+                            <div className="d-flex">
+                                <p style={{marginBottom:'0.5rem', marginTop:'0.6rem'}}>Dosen Pembimbing:</p>
+                            </div>
+                            <div className="modal-body-container">
+                                <Dropdown className="w-100">
+                                    <Dropdown.Toggle style={{backgroundColor: 'white'}} className="w-100 dropdown-custom-toggle">
+                                        <span className="dropdown-text" style={{ color: 'black'}}>{selectedDosen || '-Pilih Dosen-'}</span>
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu className="w-100 dropdown-menu-custom">
+                                        <div className="dropdown-search">
+                                            <FormControl
+                                                type="text"
+                                                placeholder="Search..."
+                                                onChange={(e) => setSearchTerm(e.target.value)}
+                                                value={searchTerm}
+                                            />
+                                        </div>
+                                        {filteredDosen.map((dosen, index) => (
+                                            <Dropdown.Item
+                                                key={index}
+                                                onClick={() => setSelectedDosen(dosen)}
+                                            >
+                                                {dosen}
+                                            </Dropdown.Item>
+                                        ))}
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
                             <Form.Group controlId="formNamaOrtu" style={{ textAlign: 'left', marginTop: '10px' }}>
                                 <Form.Label>Nama Ortu:</Form.Label>
                                 <Form.Control

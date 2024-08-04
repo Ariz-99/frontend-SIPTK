@@ -1,28 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Table } from 'react-bootstrap';
+import { Form, Button, FormControl, Table, Dropdown } from 'react-bootstrap';
 import { BsListUl, BsFiletypePdf } from "react-icons/bs";
 import { TbMessage2Question } from "react-icons/tb";
 import { IoIosSave } from "react-icons/io";
 import './JadwalPerwalianMahasiswa.css'
 
-function JadwalPerwalianMahasiswa() {
-    // const [data, setData] = useState([]);
-
-    // useEffect(() => {
-    //     // Mendapatkan data dari backend
-    //     fetchData();
-    // }, []);
-
-    // const fetchData = async () => {
-    //     try {
-    //         // Ambil data dari backend
-    //         const response = await fetch('URL_BACKEND');
-    //         const jsonData = await response.json();
-    //         setData(jsonData); // Simpan data dari backend ke dalam state
-    //     } catch (error) {
-    //         console.error('Error fetching data:', error);
-    //     }
-    // };
+function JadwalPerwalianMahasiswa() {   
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedDosen, setSelectedDosen] = useState('');
 
     const scheduleData = [
         { day: 'Senin', jadwal: 'Senin, 08:00 - 10:00', prodi: 'Teknik Informatika', mata_kuliah: 'Pemrograman Web', kelas: 'A', pengampu: 'Fitra', ruangan: 'A201' },
@@ -55,8 +40,8 @@ function JadwalPerwalianMahasiswa() {
     // Mendapatkan data jadwal yang telah dikelompokkan berdasarkan hari
     const groupedSchedule = groupScheduleByDay();
 
-     // State untuk menyimpan input dari form
-     const [formData, setFormData] = useState({
+    // State untuk menyimpan input dari form
+    const [formData, setFormData] = useState({
         input1: '',
         // Tambahkan input lainnya sesuai kebutuhan
     });
@@ -83,6 +68,12 @@ function JadwalPerwalianMahasiswa() {
         });
     };
 
+    const dosenList = ['budi', 'fitra', 'anton', 'Andi', 'teguh', 'budi', 'fitra', 'anton', 'Andi', 'teguh','budi', 'fitra', 'anton', 'Andi', 'teguh','budi', 'fitra', 'anton', 'Andi', 'teguh']; // Replace with your actual list of Pengampu
+
+    const filteredDosen = dosenList.filter(dosen =>
+        dosen.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div>
             <h5 className="jdwl-prwln-mhs">Jadwal Dosen</h5>
@@ -99,18 +90,35 @@ function JadwalPerwalianMahasiswa() {
                             <div>
                                 <p>Pilih Dosen</p>
                             </div>
-                            <div>
-                                <Form.Select aria-label="Default select example">
-                                    <option>-Pilih Dosen-</option>
-                                    <option value="1">Ariz</option>
-                                    <option value="2">Fitra</option>
-                                    <option value="3">Marul</option>
-                                </Form.Select>
+                            <div className="modal-body-container">
+                                <Dropdown className="w-100">
+                                    <Dropdown.Toggle style={{backgroundColor: 'white'}} className="w-100 dropdown-custom-toggle">
+                                        <span className="dropdown-text" style={{ color: 'black'}}>{selectedDosen || '-Pilih Dosen-'}</span>
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu className="w-100 dropdown-menu-custom">
+                                        <div className="dropdown-search">
+                                            <FormControl
+                                                type="text"
+                                                placeholder="Search..."
+                                                onChange={(e) => setSearchTerm(e.target.value)}
+                                                value={searchTerm}
+                                            />
+                                        </div>
+                                        {filteredDosen.map((dosen, index) => (
+                                            <Dropdown.Item
+                                                key={index}
+                                                onClick={() => setSelectedDosen(dosen)}
+                                            >
+                                                {dosen}
+                                            </Dropdown.Item>
+                                        ))}
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <hr className='hr-style' />
+                        <hr className='hr-style' /> 
                     </div>
                     <div>
                         <Table responsive>
@@ -155,7 +163,7 @@ function JadwalPerwalianMahasiswa() {
                         <div>
                             {/* Form untuk mengisi data */}
                             <Form onSubmit={handleSubmit}>
-                                <Form.Group controlId="input1" style={{textAlign: 'left'}}>
+                                <Form.Group controlId="input1" style={{ textAlign: 'left' }}>
                                     <Form.Label>Jadwal yang diajukan</Form.Label>
                                     <Form.Control
                                         type="text"
