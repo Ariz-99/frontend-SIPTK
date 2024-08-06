@@ -21,7 +21,8 @@ import AdminDashboard from './components/admin/AdminDashboard.js';
 import AdminHome from './components/admin/AdminHome/AdminHome.js';
 import DataMahasiswa from './components/admin/DataMahasiswa/DataMahasiswa.js';
 import DataDosen from './components/admin/DataDosen/DataDosen.js';
-import DataGPM from './components/admin/DataGPM/DataGPM.js'
+import DataGPM from './components/admin/DataGPM/DataGPM.js';
+import JadwalDosen from './components/admin/JadwalDosen/JadwalDosen.js';
 import ImportData from './components/admin/ImportData/ImportData.js';
 import Login from './components/login/Login.js';
 
@@ -57,6 +58,7 @@ function App() {
             <Route path="data-mahasiswa" element={<DataMahasiswa />} />
             <Route path="data-dosen" element={<DataDosen />} />
             <Route path="data-gpm" element={<DataGPM />} />
+            <Route path="jadwal-dosen" element={<JadwalDosen />} />
             <Route path="import-data" element={<ImportData />} />
         </Route>
       </Routes>

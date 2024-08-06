@@ -120,7 +120,7 @@ function DataDosen() {
                             style={{ backgroundColor: '#DE9560', borderColor: '#DE9560', marginTop: '10px' }}
                             onClick={() => openTambahGpm()}
                         >
-                            Tambah Dosen
+                            Tambah GPM
                         </Button>
                     </div>
                 </div>

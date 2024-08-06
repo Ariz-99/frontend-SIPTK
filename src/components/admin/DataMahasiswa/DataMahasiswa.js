@@ -127,6 +127,11 @@ function DataMahasiswa() {
         console.log(`Hapus Mahasiswa dengan NIM: ${mhs.nim}`);
     };
 
+    const handleMahasiswaPerPageChange = (value) => {
+        setMahasiswaPerPage(value);
+        setCurrentPage(1);
+    };
+
     const pengampuList = ['budi', 'fitra', 'anton', 'Andi', 'teguh', 'budi', 'fitra', 'anton', 'Andi', 'teguh','budi', 'fitra', 'anton', 'Andi', 'teguh','budi', 'fitra', 'anton', 'Andi', 'teguh']; // Replace with your actual list of Pengampu
 
     const filteredPengampu = pengampuList.filter(pengampu =>
@@ -202,7 +207,7 @@ function DataMahasiswa() {
                                     <tbody>
                                         {currentMahasiswa.map((mhs, index) => (
                                             <tr key={mhs.id}>
-                                                <td>{index + 1}</td>
+                                                <td>{indexOfFirstMahasiswa + index + 1}</td>
                                                 <td className="table-cell-ellipsis">{mhs.nim}</td>
                                                 <td className="table-cell-ellipsis">{mhs.name}</td>
                                                 <td className="table-cell-ellipsis">{mhs.semester}</td>
@@ -223,7 +228,7 @@ function DataMahasiswa() {
                                                             style={{ backgroundColor: '#DE9560', borderColor: '#DE9560' }}
                                                             onClick={() => openPengampu(mhs)}
                                                         >
-                                                            Tambah Pengampu
+                                                            Tambah Dosen
                                                         </Button>
                                                         <Button
                                                             className='small-btn'
@@ -246,9 +251,9 @@ function DataMahasiswa() {
                                             {mahasiswaPerPage}
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item onClick={() => setMahasiswaPerPage(20)}>20</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setMahasiswaPerPage(50)}>50</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(20)}>20</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(50)}>50</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(100)}>100</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>
@@ -339,7 +344,7 @@ function DataMahasiswa() {
             </Modal>
             <Modal show={showPengampu} onHide={closePengampu}>
                 <Modal.Header style={{ backgroundColor: '#4E52BE' }}>
-                    <Modal.Title style={{ color: 'white' }}>Pilih Pengampu</Modal.Title>
+                    <Modal.Title style={{ color: 'white' }}>Pilih Dosen</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="modal-body-container">

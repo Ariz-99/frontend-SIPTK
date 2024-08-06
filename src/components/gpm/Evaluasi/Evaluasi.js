@@ -103,6 +103,11 @@ function Evaluasi() {
         setShowModal(false);
     };
 
+    const handleMahasiswaPerPageChange = (value) => {
+        setMahasiswaPerPage(value);
+        setCurrentPage(1);
+    };
+
     // Mengatur index data mahasiswa pertama dan terakhir pada setiap halaman
     const indexOfLastMahasiswa = currentPage * mahasiswaPerPage;
     const indexOfFirstMahasiswa = indexOfLastMahasiswa - mahasiswaPerPage;
@@ -203,9 +208,9 @@ function Evaluasi() {
                                     {mahasiswaPerPage}
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(20)}>20</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(50)}>50</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(20)}>20</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(50)}>50</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(100)}>100</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>

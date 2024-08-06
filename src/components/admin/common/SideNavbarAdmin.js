@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nav, Button, Card } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { BsPersonCircle, BsBellFill, BsClipboard2Check, BsSpeedometer2 } from "react-icons/bs";
+import { BsPersonCircle, BsBellFill, BsClipboard2Check, BsSpeedometer2, BsCalendar3 } from "react-icons/bs";
 import { IoLogOutSharp } from "react-icons/io5";
 import { GrDownload } from "react-icons/gr";
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -33,6 +33,11 @@ function SideNavbar() {
                 <Button className="custom-button" variant='secondary'>
                     <LinkContainer to="/admin/data-gpm">
                         <Nav.Link className="sidebar-link"><BsClipboard2Check className="me-2 sidebar-link" size="20px"/>Data GPM</Nav.Link>
+                    </LinkContainer>
+                </Button>
+                <Button className="custom-button" variant='secondary'>
+                    <LinkContainer to="/admin/jadwal-dosen">
+                        <Nav.Link className="sidebar-link"><BsCalendar3 className="me-2 sidebar-link" size="20px"/>Jadwal Dosen</Nav.Link>
                     </LinkContainer>
                 </Button>
                 <Button className="custom-button" variant='secondary'>

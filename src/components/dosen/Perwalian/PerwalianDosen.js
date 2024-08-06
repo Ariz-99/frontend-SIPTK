@@ -35,8 +35,6 @@ function PerwalianDosen() {
         setFilteredMahasiswa(results);
     }, [nimFilter, nameFilter, semesterFilter, alertFilter]);
 
-
-
     const Mahasiswa = [
         { id: 1, name: 'Ariz Muhammad Fajar', nim: '2222222222', semester: 8, address: 'Padang, Indonesia', phone: '081234567890', alert: 'aman', date: 'Senin, 29 April 2024', uraian: 'Awal Kuliah', problem: 'Sulit Belajar', clock: '07.00' },
         { id: 2, name: 'Fitra', nim: '3333333333', semester: 8, address: 'Jakarta, Indonesia', phone: '081234567890', alert: 'kendala' },
@@ -128,6 +126,11 @@ function PerwalianDosen() {
 
     const handleRecommendationChange = (e) => {
         setRecommendation(e.target.value);
+    };
+
+    const handleMahasiswaPerPageChange = (value) => {
+        setMahasiswaPerPage(value);
+        setCurrentPage(1);
     };
 
     return (
@@ -232,9 +235,9 @@ function PerwalianDosen() {
                                                     {mahasiswaPerPage}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(20)}>20</Dropdown.Item>
-                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(50)}>50</Dropdown.Item>
-                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(20)}>20</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(50)}>50</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(100)}>100</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         </div>
@@ -327,9 +330,9 @@ function PerwalianDosen() {
                                                     {mahasiswaPerPage}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(20)}>20</Dropdown.Item>
-                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(50)}>50</Dropdown.Item>
-                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(20)}>20</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(50)}>50</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(100)}>100</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         </div>
@@ -439,9 +442,9 @@ function PerwalianDosen() {
                                                     {mahasiswaPerPage}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(20)}>20</Dropdown.Item>
-                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(50)}>50</Dropdown.Item>
-                                                    <Dropdown.Item onClick={() => setMahasiswaPerPage(100)}>100</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(20)}>20</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(50)}>50</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleMahasiswaPerPageChange(100)}>100</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         </div>

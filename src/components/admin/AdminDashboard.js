@@ -15,7 +15,7 @@ function AdminDashboard() {
                     <Col md={2} style={{ paddingLeft: 0, paddingRight: 0 }}>
                         <SideNavbar />
                     </Col>
-                    <Col md={10} style={{ paddingLeft: 20, marginBottom: 40}}>
+                    <Col md={10} style={{ padding: 20, marginBottom: 40}}>
                         
                         <Outlet />
                     </Col>
