@@ -16,3 +16,29 @@
     font-size: 0.6rem;      /* Adjust font size as needed */
 }
 
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.info-item {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.label {
+    width: 120px;
+    font-weight: bold;
+}
+
+.value {
+    flex: 1;
+}
+
+
