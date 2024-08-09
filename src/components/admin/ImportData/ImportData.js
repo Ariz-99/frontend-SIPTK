@@ -52,6 +52,24 @@ function ImportData() {
                                     Upload
                                 </Button>
                             </div>
+                            <div style={{ marginBottom: '30px' }}>
+                                <h4 style={{ marginBottom: '10px' }}>Download Template Data Mahasiswa</h4>
+                                <Button
+                                    variant="danger"
+                                    href="../templates/Mahasiswa Database SIPTK.xlsx"
+                                    download>
+                                    Download
+                                </Button>
+                            </div>
+                            <div style={{ marginBottom: '30px' }}>
+                                <h4 style={{ marginBottom: '10px' }}>Download Template Jadwal Dosen</h4>
+                                <Button
+                                    variant="danger"
+                                    href="../templates/Jadwal Dosen Database.xlsx"
+                                    download>
+                                    Download
+                                </Button>
+                            </div>
                         </Card.Body>
                     </Card>
                 </Col>
