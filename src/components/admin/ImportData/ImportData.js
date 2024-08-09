@@ -65,7 +65,7 @@ function ImportData() {
                                 <h4 style={{ marginBottom: '10px' }}>Download Template Jadwal Dosen</h4>
                                 <Button
                                     variant="danger"
-                                    href="../templates/Jadwal Dosen Database.xlsx"
+                                    href="../templates/Jadwal Dosen Database SIPTK.xlsx"
                                     download>
                                     Download
                                 </Button>
