@@ -271,6 +271,7 @@ function PerwalianMahasiswa() {
                                     <th>Semester</th>
                                     <th>Nomor HP Dosen</th>
                                     <th>Waktu</th>
+                                    <th>Keterangan</th>
                                     <th>Hasil</th>
                                 </tr>
                             </thead>
@@ -283,6 +284,7 @@ function PerwalianMahasiswa() {
                                         <td>{mhs.semester}</td>
                                         <td>{mhs.nohpdosen}</td>
                                         <td>{mhs.clock}</td>
+                                        <td>{mhs.keterangan}</td>
                                         <td style={{ color: mhs.hasil === 'Approved' ? 'green' : 'red' }}>
                                             {mhs.hasil}
                                         </td>

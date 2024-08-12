@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef}from 'react';
-import { Card, Button, Form, FormControl, Table, Pagination, Dropdown } from 'react-bootstrap';
+import { Card, Button, Form, FormControl, Table, Pagination, Dropdown, Modal } from 'react-bootstrap';
 import { BsCheckCircle } from "react-icons/bs";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { RiAlarmWarningFill } from "react-icons/ri";
@@ -10,6 +10,12 @@ function JadwalPerwalianDosen() {
     const [filteredMahasiswa, setFilteredMahasiswa] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [mahasiswaPerPage, setMahasiswaPerPage] = useState(20);
+    const [selectedMahasiswa, setSelectedMahasiswa] = useState({});
+
+    const [showModal, setShowModal] = useState(false);
+    const [alertModal, setAlertModal] = useState(false);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [confirmAction, setConfirmAction] = useState(null);
 
     useEffect(() => {
         const results = Mahasiswa.filter(Mahasiswa =>
@@ -90,6 +96,29 @@ function JadwalPerwalianDosen() {
         { id: 60, name: 'Marul', nim: '444444444', semester: 8, address: 'Pati, Indonesia', phone: '081234567890', status: 'tidak aman' },
     ];
 
+    const openModal = (mhs) => {
+        setSelectedMahasiswa(mhs);
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
+    const handleApprove = (mhs) => {
+        setSelectedMahasiswa(mhs);
+        setShowConfirmModal(true);
+        setConfirmAction(() => () => {
+            // Logika setelah konfirmasi, misalnya untuk menyetujui mahasiswa
+            console.log(`Mahasiswa dengan NIM ${mhs.nim} disetujui.`);
+            setShowConfirmModal(false);
+        });
+    };
+
+    const handleConfirm = () => {
+        if (confirmAction) confirmAction();
+    };
+
     return (
         <div>
              <Card>
@@ -138,8 +167,8 @@ function JadwalPerwalianDosen() {
                                         {mhs.status === 'tidak aman' && <RiAlarmWarningFill color="red" />}
                                     </td>
                                     <td>
-                                        <Button variant='danger' style={{ marginRight: '5px' }}><IoMdCloseCircleOutline /> Reject</Button>
-                                        <Button variant='success'><BsCheckCircle /> Approve</Button>
+                                        <Button variant='danger' style={{ marginRight: '5px' }}  onClick={() => openModal(mhs)}><IoMdCloseCircleOutline /> Reject</Button>
+                                        <Button variant='success'onClick={() => handleApprove(mhs)}><BsCheckCircle /> Approve</Button>
                                     </td>
                                 </tr>
                             ))}
@@ -168,6 +197,40 @@ function JadwalPerwalianDosen() {
                         </div>
                 </Card.Body>
             </Card>
+            <Modal show={showModal} onHide={closeModal}>
+                <Modal.Header style={{ backgroundColor: '#4E52BE' }} closeButton>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group style={{ textAlign: 'left', marginBottom: '10px' }}>
+                            <Form.Label>Keterangan</Form.Label>
+                            <Form.Control as="textarea" rows={3} />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary">
+                        Submit
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)}>
+                <Modal.Header style={{ backgroundColor: '#4E52BE' }}>
+                    <Modal.Title>Konfirmasi</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Apakah Anda yakin menyetujui ini?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
+                        Batal
+                    </Button>
+                    <Button variant="primary" onClick={handleConfirm}>
+                        Setuju
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
